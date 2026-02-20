@@ -1357,6 +1357,7 @@ color background_material_dark
 color background_material_light
 color bg_blue_light
 color bg_light
+color bg_main
 color bg_orange_light
 color bg_red_light
 color bg_streak
@@ -1364,6 +1365,7 @@ color blue_dark
 color blue_primary
 color border
 color border_blue
+color border_light
 color border_orange
 color bottom_nav_color
 color bright_foreground_disabled_material_dark
@@ -1424,6 +1426,11 @@ color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
+color git_level_0
+color git_level_1
+color git_level_2
+color git_level_3
+color git_level_4
 color green_dark
 color green_primary
 color highlighted_text_material_dark
@@ -2084,8 +2091,11 @@ color notification_icon_bg_color
 color orange_dark
 color orange_light
 color orange_primary
+color primary
+color primary_dark
 color primary_dark_material_dark
 color primary_dark_material_light
+color primary_light
 color primary_material_dark
 color primary_material_light
 color primary_text_default_material_dark
@@ -2105,6 +2115,8 @@ color switch_thumb_material_dark
 color switch_thumb_material_light
 color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
+color text_main
+color text_muted
 color text_placeholder
 color text_primary
 color text_secondary
@@ -2995,6 +3007,7 @@ drawable bg_cal_day
 drawable bg_cal_today
 drawable bg_control_button
 drawable bg_error
+drawable bg_git_square
 drawable bg_input_field
 drawable bg_pause_button
 drawable bg_progress_bar
@@ -3207,10 +3220,8 @@ id bounceEnd
 id bounceStart
 id buttonPanel
 id cache_measures
-id calMonth
 id calNext
 id calPrev
-id calendarGrid
 id callMeasure
 id cancel_button
 id carryVelocity
@@ -3254,6 +3265,8 @@ id custom
 id customPanel
 id cut
 id date_picker_actions
+id dayBg
+id dayText
 id decelerate
 id decelerateAndComplete
 id decor_content_parent
@@ -3321,8 +3334,7 @@ id fullscreen_header
 id germanWord
 id ghost_view
 id ghost_view_holder
-id goalCountText
-id goalProgress
+id githubStreakGrid
 id gone
 id graph
 id graph_wrap
@@ -3396,6 +3408,7 @@ id matrix
 id message
 id middle
 id mini
+id monthTitle
 id month_grid
 id month_navigation_bar
 id month_navigation_fragment_toggle
@@ -3403,7 +3416,6 @@ id month_navigation_next
 id month_navigation_previous
 id month_title
 id motion_base
-id motivationText
 id mtrl_anchor_parent
 id mtrl_calendar_day_selector_frame
 id mtrl_calendar_days_of_week
@@ -3564,7 +3576,6 @@ id src_over
 id standard
 id start
 id startHorizontal
-id startLessonBtn
 id startToEnd
 id startVertical
 id staticLayout
@@ -3786,6 +3797,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout item_calendar_day
 layout item_category_header
 layout item_word
 layout item_word_manage

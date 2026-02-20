@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_streak">
+    android:background="@color/bg_main">
 
-    <!-- Top Header -->
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -13,7 +12,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="16dp"
-        android:background="@color/bg_streak"
+        android:background="@color/white"
         android:elevation="2dp">
 
         <ImageButton
@@ -31,10 +30,9 @@
             android:text="@string/streak_title"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_main" />
     </LinearLayout>
 
-    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,32 +42,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
-            <!-- Streak Hero -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="24dp"
-                android:paddingBottom="16dp">
+                android:gravity="center_horizontal"
+                android:paddingVertical="24dp">
 
-                <!-- Streak Society Badge -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/streak_society"
-                    android:background="@drawable/bg_streak_society"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.06"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
-                    android:layout_marginBottom="12dp" />
-
-                <!-- Streak Number -->
                 <TextView
                     android:id="@+id/streakNumber"
                     android:layout_width="wrap_content"
@@ -77,218 +59,168 @@
                     android:text="0"
                     android:textSize="72sp"
                     android:textStyle="bold"
-                    android:textColor="@color/orange_primary" />
+                    android:textColor="@color/primary" />
 
-                <!-- Day Streak Label -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/day_streak"
+                    android:text="Day Streak!"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    android:textColor="@color/orange_light"
-                    android:layout_marginTop="4dp" />
+                    android:textColor="@color/text_muted" />
             </LinearLayout>
 
-            <!-- Motivational Card -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Streak Calendar"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_main"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="12dp" />
+
+            <!-- Card container centered -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_rounded_card"
-                android:padding="18dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="24dp"
-                android:gravity="top">
+                android:gravity="center"
+                android:paddingHorizontal="20dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⏱️"
-                    android:textSize="36sp"
-                    android:layout_marginEnd="14dp" />
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_rounded_card"
+                    android:padding="16dp"
+                    android:gravity="center_horizontal">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    <!-- Month Navigation Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
 
-                    <TextView
-                        android:id="@+id/motivationText"
+                        <ImageButton
+                            android:id="@+id/calPrev"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@android:drawable/ic_media_previous"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Previous Month"
+                            android:tint="@color/text_muted" />
+
+                        <TextView
+                            android:id="@+id/monthTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_main" />
+
+                        <ImageButton
+                            android:id="@+id/calNext"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@android:drawable/ic_media_next"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Next Month"
+                            android:tint="@color/text_muted" />
+                    </LinearLayout>
+
+                    <!-- Week Day Headers -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Su" android:gravity="center" android:textSize="11sp" android:textColor="@color/text_muted" android:textStyle="bold"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Mo" android:gravity="center" android:textSize="11sp" android:textColor="@color/text_muted" android:textStyle="bold"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Tu" android:gravity="center" android:textSize="11sp" android:textColor="@color/text_muted" android:textStyle="bold"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="We" android:gravity="center" android:textSize="11sp" android:textColor="@color/text_muted" android:textStyle="bold"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Th" android:gravity="center" android:textSize="11sp" android:textColor="@color/text_muted" android:textStyle="bold"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Fr" android:gravity="center" android:textSize="11sp" android:textColor="@color/text_muted" android:textStyle="bold"/>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Sa" android:gravity="center" android:textSize="11sp" android:textColor="@color/text_muted" android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- Calendar Grid -->
+                    <GridLayout
+                        android:id="@+id/githubStreakGrid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:lineSpacingMultiplier="1.4" />
+                        android:columnCount="7"
+                        android:rowCount="6"
+                        android:useDefaultMargins="false" />
 
-                    <TextView
-                        android:id="@+id/startLessonBtn"
+                    <!-- Legend -->
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/start_lesson"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/orange_primary"
-                        android:letterSpacing="0.03"
-                        android:layout_marginTop="6dp"
-                        android:clickable="true"
-                        android:focusable="true" />
-                </LinearLayout>
-            </LinearLayout>
+                        android:orientation="horizontal"
+                        android:layout_gravity="end"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="20dp">
 
-            <!-- Streak Calendar -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/streak_calendar"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:paddingHorizontal="20dp"
-                android:paddingBottom="12dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Less"
+                            android:textSize="10sp"
+                            android:textColor="@color/text_muted"
+                            android:layout_marginEnd="6dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_rounded_card"
-                android:padding="20dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="24dp">
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/bg_git_square"
+                            android:backgroundTint="@color/git_level_0"
+                            android:layout_marginEnd="3dp"/>
 
-                <!-- Calendar Header -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/bg_git_square"
+                            android:backgroundTint="@color/git_level_1"
+                            android:layout_marginEnd="3dp"/>
 
-                    <Button
-                        android:id="@+id/calPrev"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:text="◀"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:textColor="@color/text_tertiary"
-                        android:textSize="16sp" />
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/bg_git_square"
+                            android:backgroundTint="@color/git_level_2"
+                            android:layout_marginEnd="3dp"/>
 
-                    <TextView
-                        android:id="@+id/calMonth"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary" />
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/bg_git_square"
+                            android:backgroundTint="@color/git_level_3"
+                            android:layout_marginEnd="3dp"/>
 
-                    <Button
-                        android:id="@+id/calNext"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:text="▶"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:textColor="@color/text_tertiary"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/bg_git_square"
+                            android:backgroundTint="@color/git_level_4"
+                            android:layout_marginEnd="6dp"/>
 
-                <!-- Day headers -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
-
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Su" android:gravity="center" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/text_tertiary" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Mo" android:gravity="center" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/text_tertiary" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Tu" android:gravity="center" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/text_tertiary" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="We" android:gravity="center" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/text_tertiary" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Th" android:gravity="center" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/text_tertiary" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Fr" android:gravity="center" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/text_tertiary" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Sa" android:gravity="center" android:textSize="13sp" android:textStyle="bold" android:textColor="@color/text_tertiary" />
-                </LinearLayout>
-
-                <!-- Calendar Grid (populated programmatically) -->
-                <GridLayout
-                    android:id="@+id/calendarGrid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:columnCount="7" />
-            </LinearLayout>
-
-            <!-- Streak Goal -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/streak_goal"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:paddingHorizontal="20dp"
-                android:paddingBottom="12dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_rounded_card"
-                android:padding="20dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="24dp"
-                android:gravity="center_vertical">
-
-                <!-- Progress Ring -->
-                <ProgressBar
-                    android:id="@+id/goalProgress"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:indeterminate="false"
-                    android:max="5"
-                    android:progress="0"
-                    android:layout_marginEnd="16dp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/daily_word_goal"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/daily_goal_desc"
-                        android:textSize="14sp"
-                        android:textColor="@color/text_tertiary"
-                        android:layout_marginTop="4dp" />
-
-                    <TextView
-                        android:id="@+id/goalCountText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0/5"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/orange_primary"
-                        android:layout_marginTop="8dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="More"
+                            android:textSize="10sp"
+                            android:textColor="@color/text_muted"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

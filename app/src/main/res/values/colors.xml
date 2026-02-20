@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Duolingo-inspired palette -->
-    <color name="green_primary">#FF58CC02</color>
-    <color name="green_dark">#FF46A302</color>
-    <color name="blue_primary">#FF1CB0F6</color>
-    <color name="blue_dark">#FF0D8ECF</color>
-    <color name="orange_primary">#FFFF9600</color>
+    <!-- Primary Palette -->
+    <color name="primary">#FF2D55FF</color>
+    <color name="primary_dark">#FF1A3BB2</color>
+    <color name="primary_light">#FFE8EFFF</color>
+
+    <color name="green_primary">#FF28A745</color>
+    <color name="green_dark">#FF1E7E34</color>
+    <color name="blue_primary">#FF007BFF</color>
+    <color name="blue_dark">#FF0056B3</color>
+    <color name="orange_primary">#FFFF8C00</color>
     <color name="orange_dark">#FFD47D00</color>
     <color name="orange_light">#FFFFB74D</color>
-    <color name="red_primary">#FFFF4B4B</color>
+    <color name="red_primary">#FFDC3545</color>
 
     <!-- Neutrals -->
     <color name="white">#FFFFFFFF</color>
-    <color name="bg_light">#FFFAFAFA</color>
-    <color name="bg_streak">#FFFFF8E1</color>
-    <color name="text_primary">#FF3C3C3C</color>
-    <color name="text_secondary">#FF777777</color>
-    <color name="text_tertiary">#FFAFAFAF</color>
-    <color name="text_placeholder">#FFCCCCCC</color>
-    <color name="border">#FFE5E5E5</color>
-    <color name="border_orange">#FFFFE0B2</color>
-    <color name="border_blue">#FFBBDEFB</color>
+    <color name="bg_main">#FFF8F9FA</color>
+    <color name="text_main">#FF212529</color>
+    <color name="text_muted">#FF6C757D</color>
+    <color name="text_placeholder">#FFADB5BD</color>
+    <color name="border">#FFDEE2E6</color>
+    <color name="border_light">#FFDEE2E6</color>
+
+    <!-- GitHub Streak Colors (Modernized) -->
+    <color name="git_level_0">#EBEDF0</color>
+    <color name="git_level_1">#9BE9A8</color>
+    <color name="git_level_2">#40C463</color>
+    <color name="git_level_3">#30A14E</color>
+    <color name="git_level_4">#216E39</color>
+
+    <!-- Backgrounds and Borders -->
     <color name="bg_orange_light">#FFFFF3E0</color>
+    <color name="border_orange">#FFFFE0B2</color>
     <color name="bg_blue_light">#FFE3F2FD</color>
+    <color name="border_blue">#FFBBDEFB</color>
     <color name="bg_red_light">#FFFFF0F0</color>
+
+    <!-- Legacy / Compatibility -->
+    <color name="bg_light">#FFFAFAFA</color>
+    <color name="bg_streak">#FFF8F9FA</color>
+    <color name="text_primary">#FF212529</color>
+    <color name="text_secondary">#FF495057</color>
+    <color name="text_tertiary">#FFADB5BD</color>
     <color name="transparent">#00000000</color>
 </resources>

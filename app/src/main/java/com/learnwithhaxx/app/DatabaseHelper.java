@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "vocab.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2; // Incremented version
 
     // Table names
     private static final String TABLE_USERS = "users";
@@ -60,6 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "user_id INTEGER NOT NULL, " +
                 "active_date TEXT NOT NULL, " +
+                "word_count INTEGER DEFAULT 0, " + // New column
                 "FOREIGN KEY (user_id) REFERENCES users(id), " +
                 "UNIQUE(user_id, active_date))");
 
@@ -72,7 +74,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Future migrations go here
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE " + TABLE_STREAK_DATES + " ADD COLUMN word_count INTEGER DEFAULT 0");
+        }
     }
 
     // ─── Helper ─────────────────────────────────────────
@@ -144,9 +148,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return words;
     }
 
-    /**
-     * Returns words grouped by part_of_speech, ordered by category then date.
-     */
     public Map<String, List<Word>> getWordsByCategory() {
         Map<String, List<Word>> grouped = new LinkedHashMap<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -198,47 +199,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String yesterday = getYesterday();
         int todayCount = getTodayWordCount();
 
+        // Update word_count in streak_dates table
+        ContentValues scv = new ContentValues();
+        scv.put("user_id", 1);
+        scv.put("active_date", today);
+        scv.put("word_count", todayCount);
+        db.insertWithOnConflict(TABLE_STREAK_DATES, null, scv, SQLiteDatabase.CONFLICT_REPLACE);
+
         String lastActive = user.getLastActiveDate();
         int currentStreak = user.getStreak();
 
         if (todayCount >= 5) {
-            // Log today as active
-            ContentValues cv = new ContentValues();
-            cv.put("user_id", 1);
-            cv.put("active_date", today);
-            db.insertWithOnConflict(TABLE_STREAK_DATES, null, cv, SQLiteDatabase.CONFLICT_IGNORE);
-
             if (today.equals(lastActive)) {
-                // Already updated today — do nothing
+                // Already updated today
             } else if (yesterday.equals(lastActive)) {
-                // Consecutive day → increment
                 currentStreak += 1;
                 ContentValues uv = new ContentValues();
                 uv.put("streak", currentStreak);
                 uv.put("last_active_date", today);
                 db.update(TABLE_USERS, uv, "id = 1", null);
             } else if (lastActive == null) {
-                // First time
                 ContentValues uv = new ContentValues();
                 uv.put("streak", 1);
                 uv.put("last_active_date", today);
                 db.update(TABLE_USERS, uv, "id = 1", null);
             } else {
-                // Missed day(s) → reset
                 ContentValues uv = new ContentValues();
                 uv.put("streak", 1);
                 uv.put("last_active_date", today);
                 db.update(TABLE_USERS, uv, "id = 1", null);
             }
         } else {
-            // Haven't hit 5 yet
             if (lastActive != null && !lastActive.equals(today) && !lastActive.equals(yesterday)) {
-                // Missed day(s) → reset streak
                 ContentValues uv = new ContentValues();
                 uv.put("streak", 0);
                 db.update(TABLE_USERS, uv, "id = 1", null);
             }
         }
+    }
+
+    public Map<String, Integer> getStreakCounts() {
+        Map<String, Integer> counts = new HashMap<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT active_date, word_count FROM " + TABLE_STREAK_DATES + " WHERE user_id = 1", null);
+        while (c.moveToNext()) {
+            counts.put(c.getString(0), c.getInt(1));
+        }
+        c.close();
+        return counts;
     }
 
     public List<String> getStreakDates() {

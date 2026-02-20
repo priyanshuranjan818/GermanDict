@@ -3,13 +3,13 @@ package com.learnwithhaxx.app;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,20 +21,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class StreakActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
-    private Calendar calendarDate;
     private List<String> streakDates;
+    private Map<String, Integer> streakCounts;
+    private Calendar currentCal = Calendar.getInstance();
 
     // Views
     private TextView streakNumber;
-    private TextView motivationText;
-    private TextView calMonth;
-    private GridLayout calendarGrid;
-    private ProgressBar goalProgress;
-    private TextView goalCountText;
+    private GridLayout githubStreakGrid;
+    private TextView monthTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,29 +41,21 @@ public class StreakActivity extends AppCompatActivity {
         setContentView(R.layout.activity_streak);
 
         db = DatabaseHelper.getInstance(this);
-        calendarDate = Calendar.getInstance();
 
-        // Views
         streakNumber = findViewById(R.id.streakNumber);
-        motivationText = findViewById(R.id.motivationText);
-        calMonth = findViewById(R.id.calMonth);
-        calendarGrid = findViewById(R.id.calendarGrid);
-        goalProgress = findViewById(R.id.goalProgress);
-        goalCountText = findViewById(R.id.goalCountText);
+        githubStreakGrid = findViewById(R.id.githubStreakGrid);
+        monthTitle = findViewById(R.id.monthTitle);
 
-        // Back button
         findViewById(R.id.backBtn).setOnClickListener(v -> finish());
-
-        // Start Lesson button
-        findViewById(R.id.startLessonBtn).setOnClickListener(v -> {
-            startActivity(new Intent(this, AddWordActivity.class));
+        findViewById(R.id.calPrev).setOnClickListener(v -> {
+            currentCal.add(Calendar.MONTH, -1);
+            renderGithubStreak();
+        });
+        findViewById(R.id.calNext).setOnClickListener(v -> {
+            currentCal.add(Calendar.MONTH, 1);
+            renderGithubStreak();
         });
 
-        // Calendar navigation
-        findViewById(R.id.calPrev).setOnClickListener(v -> changeMonth(-1));
-        findViewById(R.id.calNext).setOnClickListener(v -> changeMonth(1));
-
-        // Bottom Navigation
         setupBottomNav();
     }
 
@@ -76,104 +67,106 @@ public class StreakActivity extends AppCompatActivity {
 
     private void loadData() {
         User user = db.getUser();
-        int todayCount = db.getTodayWordCount();
         streakDates = db.getStreakDates();
-
-        // Streak hero
+        streakCounts = db.getStreakCounts();
         streakNumber.setText(String.valueOf(user.getStreak()));
 
-        // Motivation text
-        int remaining = Math.max(5 - todayCount, 0);
-        String wordText = remaining == 1 ? "word" : "words";
-        motivationText.setText("Add " + remaining + " more " + wordText + " today to extend your streak!");
-
-        // Goal progress
-        goalProgress.setMax(5);
-        goalProgress.setProgress(Math.min(todayCount, 5));
-        goalCountText.setText(todayCount + "/5");
-
-        // Render calendar
-        renderCalendar();
+        renderGithubStreak();
     }
 
-    private void changeMonth(int delta) {
-        calendarDate.add(Calendar.MONTH, delta);
-        renderCalendar();
-    }
+    private void renderGithubStreak() {
+        githubStreakGrid.removeAllViews();
 
-    private void renderCalendar() {
-        int year = calendarDate.get(Calendar.YEAR);
-        int month = calendarDate.get(Calendar.MONTH);
+        int currentMonth = currentCal.get(Calendar.MONTH);
+        int currentYear = currentCal.get(Calendar.YEAR);
 
-        String[] months = {"January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"};
-        calMonth.setText(months[month] + " " + year);
+        // Start of month
+        Calendar monthStart = Calendar.getInstance();
+        monthStart.set(currentYear, currentMonth, 1);
+        // Clear time fields to avoid comparison issues
+        monthStart.set(Calendar.HOUR_OF_DAY, 0);
+        monthStart.set(Calendar.MINUTE, 0);
+        monthStart.set(Calendar.SECOND, 0);
+        monthStart.set(Calendar.MILLISECOND, 0);
 
-        // First day of month (0=Sunday)
-        Calendar first = Calendar.getInstance();
-        first.set(year, month, 1);
-        int firstDayOfWeek = first.get(Calendar.DAY_OF_WEEK) - 1; // 0-based
+        // Calculate the first Sunday to display
+        Calendar gridStart = (Calendar) monthStart.clone();
+        int dayOfWeek = gridStart.get(Calendar.DAY_OF_WEEK);
+        // Calendar.SUNDAY is 1. Move back to the previous Sunday.
+        gridStart.add(Calendar.DAY_OF_YEAR, -(dayOfWeek - 1));
 
-        // Days in month
-        int daysInMonth = first.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-        // Today string
-        String todayStr = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Calendar.getInstance().getTime());
-
-        calendarGrid.removeAllViews();
-
-        int totalCells = firstDayOfWeek + daysInMonth;
-        int rows = (int) Math.ceil(totalCells / 7.0);
-        calendarGrid.setRowCount(rows + 1); // +1 for safety
+        githubStreakGrid.setColumnCount(7);
+        githubStreakGrid.setRowCount(6);
 
         int cellSize = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, 36, getResources().getDisplayMetrics());
+                TypedValue.COMPLEX_UNIT_DIP, 32, getResources().getDisplayMetrics());
+        int margin = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+        int radius = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
 
-        // Empty cells before first day
-        for (int i = 0; i < firstDayOfWeek; i++) {
-            TextView empty = new TextView(this);
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.width = 0;
-            params.height = cellSize;
-            params.columnSpec = GridLayout.spec(i % 7, 1f);
-            params.rowSpec = GridLayout.spec(i / 7);
-            empty.setLayoutParams(params);
-            calendarGrid.addView(empty);
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        SimpleDateFormat monthSdf = new SimpleDateFormat("MMMM yyyy", Locale.US);
 
-        // Day cells
-        for (int d = 1; d <= daysInMonth; d++) {
-            TextView dayView = new TextView(this);
-            dayView.setText(String.valueOf(d));
-            dayView.setGravity(Gravity.CENTER);
-            dayView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            dayView.setTypeface(null, Typeface.BOLD);
-            dayView.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+        monthTitle.setText(monthSdf.format(monthStart.getTime()));
 
-            int cellIndex = firstDayOfWeek + d - 1;
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.width = 0;
-            params.height = cellSize;
-            params.columnSpec = GridLayout.spec(cellIndex % 7, 1f);
-            params.rowSpec = GridLayout.spec(cellIndex / 7);
-            dayView.setLayoutParams(params);
+        Calendar iterCal = (Calendar) gridStart.clone();
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 7; c++) {
+                View cellContainer = getLayoutInflater().inflate(R.layout.item_calendar_day, githubStreakGrid, false);
+                TextView dayText = cellContainer.findViewById(R.id.dayText);
+                View dayBg = cellContainer.findViewById(R.id.dayBg);
 
-            String dateStr = String.format(Locale.US, "%d-%02d-%02d", year, month + 1, d);
+                String dateStr = sdf.format(iterCal.getTime());
 
-            if (streakDates != null && streakDates.contains(dateStr)) {
-                dayView.setBackgroundResource(R.drawable.bg_cal_active);
-                dayView.setTextColor(Color.WHITE);
-            }
+                if (iterCal.get(Calendar.MONTH) == currentMonth) {
+                    dayText.setText(String.valueOf(iterCal.get(Calendar.DAY_OF_MONTH)));
+                    int count = streakCounts != null && streakCounts.containsKey(dateStr) ? streakCounts.get(dateStr) : 0;
+                    
+                    int levelColor = getLevelColorFromCount(dateStr);
+                    
+                    GradientDrawable shape = new GradientDrawable();
+                    shape.setShape(GradientDrawable.RECTANGLE);
+                    shape.setCornerRadius(radius);
+                    shape.setColor(levelColor);
+                    dayBg.setBackground(shape);
 
-            if (dateStr.equals(todayStr)) {
-                if (streakDates != null && streakDates.contains(dateStr)) {
-                    // Active + today: keep active background
+                    if (count > 0) {
+                        dayText.setTextColor(Color.WHITE);
+                    } else {
+                        dayText.setTextColor(ContextCompat.getColor(this, R.color.text_main));
+                    }
                 } else {
-                    dayView.setBackgroundResource(R.drawable.bg_cal_today);
+                    dayText.setText("");
+                    dayBg.setBackgroundColor(Color.TRANSPARENT);
                 }
-            }
 
-            calendarGrid.addView(dayView);
+                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                params.width = cellSize;
+                params.height = cellSize;
+                params.setMargins(margin, margin, margin, margin);
+                params.columnSpec = GridLayout.spec(c, 1f);
+                params.rowSpec = GridLayout.spec(r);
+                cellContainer.setLayoutParams(params);
+
+                githubStreakGrid.addView(cellContainer);
+                iterCal.add(Calendar.DAY_OF_YEAR, 1);
+            }
+        }
+    }
+
+    private int getLevelColorFromCount(String dateStr) {
+        Integer count = streakCounts != null ? streakCounts.get(dateStr) : null;
+        if (count == null || count == 0) {
+            return ContextCompat.getColor(this, R.color.git_level_0);
+        } else if (count < 3) {
+            return ContextCompat.getColor(this, R.color.git_level_1);
+        } else if (count < 6) {
+            return ContextCompat.getColor(this, R.color.git_level_2);
+        } else if (count < 10) {
+            return ContextCompat.getColor(this, R.color.git_level_3);
+        } else {
+            return ContextCompat.getColor(this, R.color.git_level_4);
         }
     }
 
@@ -192,10 +185,8 @@ public class StreakActivity extends AppCompatActivity {
             } else if (id == R.id.nav_learn) {
                 startActivity(new Intent(this, LearnActivity.class));
                 return true;
-            } else if (id == R.id.nav_streak) {
-                return true;
             }
-            return false;
+            return id == R.id.nav_streak;
         });
     }
 }
