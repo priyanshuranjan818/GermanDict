@@ -12,12 +12,12 @@
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_input_field.xml.flat",
-        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_input_field.xml"
-    },
-    {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_rounded_card.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_rounded_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_input_field.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_input_field.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
@@ -44,6 +44,10 @@
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_progress_bar.xml"
     },
     {
+        "merged": "com.learnwithhaxx.app-merged_res-32:/layout_activity_main.xml.flat",
+        "source": "com.learnwithhaxx.app-main-34:/layout/activity_main.xml"
+    },
+    {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_control_button.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_control_button.xml"
     },
@@ -58,10 +62,6 @@
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_cal_day.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_cal_day.xml"
-    },
-    {
-        "merged": "com.learnwithhaxx.app-merged_res-32:/layout_item_category_header.xml.flat",
-        "source": "com.learnwithhaxx.app-main-34:/layout/item_category_header.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\layout_item_category_header.xml.flat",
