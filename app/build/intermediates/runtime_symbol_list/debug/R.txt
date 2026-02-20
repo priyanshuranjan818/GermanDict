@@ -3189,6 +3189,7 @@ int id auto 0x7f090053
 int id autoComplete 0x7f090054
 int id autoCompleteToEnd 0x7f090055
 int id autoCompleteToStart 0x7f090056
+int id backArrow 0x7f090225
 int id backBtn 0x7f090057
 int id backToDashboardBtn 0x7f090058
 int id barrier 0x7f090059
@@ -3213,6 +3214,8 @@ int id callMeasure 0x7f09006b
 int id cancel_button 0x7f09006c
 int id carryVelocity 0x7f09006d
 int id categoryArrow 0x7f09006e
+int id categoryCount 0x7f090222
+int id categoryIcon 0x7f090223
 int id categoryTitle 0x7f09006f
 int id center 0x7f090070
 int id centerCrop 0x7f090071
@@ -3641,8 +3644,8 @@ int id withText 0x7f090217
 int id with_icon 0x7f090218
 int id withinBounds 0x7f090219
 int id wordCategory 0x7f09021a
+int id wordExpandableList 0x7f090224
 int id wordMeaning 0x7f09021b
-int id wordRecyclerView 0x7f09021c
 int id wrap 0x7f09021d
 int id wrap_content 0x7f09021e
 int id wrap_content_constrained 0x7f09021f

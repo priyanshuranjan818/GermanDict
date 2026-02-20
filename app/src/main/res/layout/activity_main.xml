@@ -95,15 +95,16 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Word List -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/wordRecyclerView"
+    <!-- Word List (Expandable) -->
+    <ExpandableListView
+        android:id="@+id/wordExpandableList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/statsBar"
         android:layout_above="@id/bottomNav"
-        android:clipToPadding="false"
-        android:paddingBottom="8dp" />
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:groupIndicator="@null" />
 
     <!-- Empty State -->
     <LinearLayout

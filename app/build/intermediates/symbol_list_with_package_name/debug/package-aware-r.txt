@@ -3190,6 +3190,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id backArrow
 id backBtn
 id backToDashboardBtn
 id barrier
@@ -3214,6 +3215,8 @@ id callMeasure
 id cancel_button
 id carryVelocity
 id categoryArrow
+id categoryCount
+id categoryIcon
 id categoryTitle
 id center
 id centerCrop
@@ -3642,8 +3645,8 @@ id withText
 id with_icon
 id withinBounds
 id wordCategory
+id wordExpandableList
 id wordMeaning
-id wordRecyclerView
 id wrap
 id wrap_content
 id wrap_content_constrained

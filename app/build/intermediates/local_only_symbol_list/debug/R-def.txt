@@ -38,6 +38,7 @@ drawable bg_streak_society
 drawable bg_submit_button
 drawable bg_words_badge
 drawable ic_launcher_foreground
+id backArrow
 id backBtn
 id backToDashboardBtn
 id bottomNav
@@ -46,6 +47,8 @@ id calNext
 id calPrev
 id calendarGrid
 id categoryArrow
+id categoryCount
+id categoryIcon
 id categoryTitle
 id controlsContainer
 id deleteBtn
@@ -86,8 +89,8 @@ id streakNumber
 id submitBtn
 id todayCount
 id wordCategory
+id wordExpandableList
 id wordMeaning
-id wordRecyclerView
 layout activity_add_word
 layout activity_learn
 layout activity_main

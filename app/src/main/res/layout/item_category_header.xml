@@ -5,8 +5,27 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:paddingHorizontal="16dp"
-    android:paddingVertical="10dp"
+    android:paddingVertical="12dp"
     android:background="@color/bg_light">
+
+    <TextView
+        android:id="@+id/backArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="←"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_marginEnd="12dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/categoryIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📁"
+        android:textSize="18sp"
+        android:layout_marginEnd="12dp" />
 
     <TextView
         android:id="@+id/categoryTitle"
@@ -18,10 +37,19 @@
         android:textColor="@color/text_primary" />
 
     <TextView
+        android:id="@+id/categoryCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/text_tertiary"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
         android:id="@+id/categoryArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="▾"
+        android:text="▸"
         android:textSize="14sp"
+        android:textStyle="bold"
         android:textColor="@color/text_secondary" />
 </LinearLayout>

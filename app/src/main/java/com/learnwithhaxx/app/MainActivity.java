@@ -6,17 +6,18 @@ import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -25,10 +26,16 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
     private TextToSpeech tts;
-    private RecyclerView recyclerView;
+    private ExpandableListView expandableListView;
     private LinearLayout emptyState;
     private TextView streakCount;
     private TextView todayCount;
+    
+    private List<String> allCategoriesList = new ArrayList<>();
+    private Map<String, List<Word>> allDataMap = new HashMap<>();
+    private WordExpandableAdapter adapter;
+
+    private int isolatedGroupIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,27 +44,37 @@ public class MainActivity extends AppCompatActivity {
 
         db = DatabaseHelper.getInstance(this);
 
-        recyclerView = findViewById(R.id.wordRecyclerView);
+        expandableListView = findViewById(R.id.wordExpandableList);
         emptyState = findViewById(R.id.emptyState);
         streakCount = findViewById(R.id.streakCount);
         todayCount = findViewById(R.id.todayCount);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Streak badge click → navigate to streak page
         findViewById(R.id.streakBadge).setOnClickListener(v -> {
             startActivity(new Intent(this, StreakActivity.class));
         });
 
-        // Initialize TTS
         tts = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS) {
                 tts.setLanguage(Locale.GERMAN);
             }
         });
 
-        // Bottom Navigation
         setupBottomNav();
+
+        expandableListView.setOnGroupExpandListener(groupPosition -> {
+            if (isolatedGroupIndex == -1) {
+                isolatedGroupIndex = groupPosition;
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        expandableListView.setOnGroupCollapseListener(groupPosition -> {
+            // This is handled by the back button usually, but just in case
+            if (isolatedGroupIndex != -1) {
+                isolatedGroupIndex = -1;
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -67,30 +84,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        // Load stats
         User user = db.getUser();
         streakCount.setText(String.valueOf(user.getStreak()));
         int count = db.getTodayWordCount();
         todayCount.setText(count + " / 5");
 
-        // Load words grouped by category
         Map<String, List<Word>> grouped = db.getWordsByCategory();
+        String[] allCategories = getResources().getStringArray(R.array.parts_of_speech);
+        
+        allCategoriesList.clear();
+        allDataMap.clear();
 
-        if (grouped.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
+        for (int i = 1; i < allCategories.length; i++) {
+            String cat = allCategories[i];
+            allCategoriesList.add(cat);
+            allDataMap.put(cat, grouped.getOrDefault(cat, new ArrayList<>()));
+        }
+
+        if (grouped.containsKey("Uncategorized") && !grouped.get("Uncategorized").isEmpty()) {
+            allCategoriesList.add("Uncategorized");
+            allDataMap.put("Uncategorized", grouped.get("Uncategorized"));
+        }
+
+        if (allDataMap.isEmpty() && db.getAllWords().isEmpty()) {
+            expandableListView.setVisibility(View.GONE);
             emptyState.setVisibility(View.VISIBLE);
         } else {
-            recyclerView.setVisibility(View.VISIBLE);
+            expandableListView.setVisibility(View.VISIBLE);
             emptyState.setVisibility(View.GONE);
-
-            // Build flat list with category headers
-            List<Object> items = new ArrayList<>();
-            for (Map.Entry<String, List<Word>> entry : grouped.entrySet()) {
-                items.add(entry.getKey() + " (" + entry.getValue().size() + ")");
-                items.addAll(entry.getValue());
+            adapter = new WordExpandableAdapter();
+            expandableListView.setAdapter(adapter);
+            
+            // If we were isolated, keep it (or reset if data changed significantly)
+            if (isolatedGroupIndex >= allCategoriesList.size()) {
+                isolatedGroupIndex = -1;
             }
-
-            recyclerView.setAdapter(new WordAdapter(items, word -> speakGerman(word)));
         }
     }
 
@@ -105,15 +133,16 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setSelectedItemId(R.id.nav_home);
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                return true;
-            } else if (id == R.id.nav_add) {
+            if (id == R.id.nav_home) return true;
+            if (id == R.id.nav_add) {
                 startActivity(new Intent(this, AddWordActivity.class));
                 return true;
-            } else if (id == R.id.nav_learn) {
+            }
+            if (id == R.id.nav_learn) {
                 startActivity(new Intent(this, LearnActivity.class));
                 return true;
-            } else if (id == R.id.nav_streak) {
+            }
+            if (id == R.id.nav_streak) {
                 startActivity(new Intent(this, StreakActivity.class));
                 return true;
             }
@@ -130,82 +159,112 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    // ─── RecyclerView Adapter ────────────────────────────
+    private class WordExpandableAdapter extends BaseExpandableListAdapter {
 
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_WORD = 1;
-
-    public interface WordClickListener {
-        void onSpeakClick(String word);
-    }
-
-    private static class WordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        private final List<Object> items;
-        private final WordClickListener listener;
-
-        WordAdapter(List<Object> items, WordClickListener listener) {
-            this.items = items;
-            this.listener = listener;
+        @Override
+        public int getGroupCount() {
+            return isolatedGroupIndex == -1 ? allCategoriesList.size() : 1;
         }
 
         @Override
-        public int getItemViewType(int position) {
-            return items.get(position) instanceof String ? TYPE_HEADER : TYPE_WORD;
+        public int getChildrenCount(int groupPosition) {
+            String category = getCategoryName(groupPosition);
+            return allDataMap.get(category).size();
         }
 
-        @NonNull
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            if (viewType == TYPE_HEADER) {
-                View v = LayoutInflater.from(parent.getContext())
+        public Object getGroup(int groupPosition) {
+            return getCategoryName(groupPosition);
+        }
+
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            String category = getCategoryName(groupPosition);
+            return allDataMap.get(category).get(childPosition);
+        }
+
+        private String getCategoryName(int groupPosition) {
+            if (isolatedGroupIndex != -1) {
+                return allCategoriesList.get(isolatedGroupIndex);
+            }
+            return allCategoriesList.get(groupPosition);
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+            String category = (String) getGroup(groupPosition);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_category_header, parent, false);
-                return new HeaderVH(v);
-            } else {
-                View v = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_word, parent, false);
-                return new WordVH(v);
             }
-        }
 
-        @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            if (holder instanceof HeaderVH) {
-                ((HeaderVH) holder).title.setText((String) items.get(position));
-            } else if (holder instanceof WordVH) {
-                Word word = (Word) items.get(position);
-                WordVH wh = (WordVH) holder;
-                wh.germanWord.setText(word.getGermanWord());
-                wh.meaning.setText(word.getMeaning());
-                wh.speakBtn.setOnClickListener(v -> {
-                    if (listener != null) {
-                        listener.onSpeakClick(word.getGermanWord());
-                    }
+            View backArrow = convertView.findViewById(R.id.backArrow);
+            TextView icon = convertView.findViewById(R.id.categoryIcon);
+            TextView title = convertView.findViewById(R.id.categoryTitle);
+            TextView count = convertView.findViewById(R.id.categoryCount);
+            TextView arrow = convertView.findViewById(R.id.categoryArrow);
+
+            title.setText(category);
+            count.setText(String.valueOf(allDataMap.get(category).size()));
+            
+            if (isolatedGroupIndex != -1) {
+                backArrow.setVisibility(View.VISIBLE);
+                arrow.setVisibility(View.GONE);
+                icon.setText("📂");
+                backArrow.setOnClickListener(v -> {
+                    expandableListView.collapseGroup(0);
+                    isolatedGroupIndex = -1;
+                    notifyDataSetChanged();
                 });
+            } else {
+                backArrow.setVisibility(View.GONE);
+                arrow.setVisibility(View.VISIBLE);
+                icon.setText(isExpanded ? "📂" : "📁");
+                arrow.setText(isExpanded ? "▾" : "▸");
+                backArrow.setOnClickListener(null);
             }
+
+            return convertView;
         }
 
         @Override
-        public int getItemCount() {
-            return items.size();
+        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+            Word word = (Word) getChild(groupPosition, childPosition);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_word, parent, false);
+            }
+
+            TextView germanWord = convertView.findViewById(R.id.germanWord);
+            TextView meaning = convertView.findViewById(R.id.wordMeaning);
+            ImageButton speakBtn = convertView.findViewById(R.id.speakBtn);
+
+            germanWord.setText(word.getGermanWord());
+            meaning.setText(word.getMeaning());
+            speakBtn.setOnClickListener(v -> speakGerman(word.getGermanWord()));
+
+            convertView.setPadding(60, 0, 0, 0);
+            return convertView;
         }
 
-        static class HeaderVH extends RecyclerView.ViewHolder {
-            TextView title;
-            HeaderVH(View v) {
-                super(v);
-                title = v.findViewById(R.id.categoryTitle);
-            }
-        }
-
-        static class WordVH extends RecyclerView.ViewHolder {
-            TextView germanWord, meaning;
-            View speakBtn;
-            WordVH(View v) {
-                super(v);
-                germanWord = v.findViewById(R.id.germanWord);
-                meaning = v.findViewById(R.id.wordMeaning);
-                speakBtn = v.findViewById(R.id.speakBtn);
-            }
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return true;
         }
     }
 }
