@@ -49,16 +49,16 @@
 
     <!-- Part of Speech options -->
     <string-array name="parts_of_speech">
-        <item>-- choose category --</item>
-        <item>Nomen (Substantive)</item>
-        <item>Verben</item>
-        <item>Adjektive</item>
-        <item>Adverbien</item>
-        <item>Pronomen</item>
-        <item>Artikel</item>
-        <item>Präpositionen</item>
-        <item>Konjunktionen</item>
-        <item>Partikeln</item>
-        <item>Interjektionen</item>
+        <item>— Kategorie wählen —</item>
+        <item>Nomen (Noun – person/place/thing)</item>
+        <item>Verb (Action or state)</item>
+        <item>Adjektiv (Describes a noun)</item>
+        <item>Adverb (Describes verb/adjective)</item>
+        <item>Pronomen (Replaces a noun)</item>
+        <item>Artikel (der/die/das words)</item>
+        <item>Präposition (Shows relation like in/on/with)</item>
+        <item>Konjunktion (Joins words/sentences)</item>
+        <item>Partikel (Small helper words, no direct meaning)</item>
+        <item>Interjektion (Emotional words like oh!, wow!)</item>
     </string-array>
 </resources>
