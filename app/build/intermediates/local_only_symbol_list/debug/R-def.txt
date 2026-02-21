@@ -68,6 +68,7 @@ id deleteBtn
 id emptyManage
 id emptyState
 id errorMessage
+id exportImportBtn
 id germanWord
 id githubStreakGrid
 id header

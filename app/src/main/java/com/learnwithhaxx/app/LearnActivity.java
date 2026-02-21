@@ -21,7 +21,8 @@ import java.util.Locale;
 public class LearnActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
-    private TextToSpeech tts;
+    private TextToSpeech ttsGerman;
+    private TextToSpeech ttsEnglish;
 
     private List<Word> words;
     private int currentIndex = 0;
@@ -71,11 +72,16 @@ public class LearnActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(v -> nextSlide());
 
         // Initialize TTS
-        tts = new TextToSpeech(this, status -> {
+        ttsGerman = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS) {
-                tts.setLanguage(Locale.GERMAN);
-                // Load words after TTS is ready
-                initSlideshow();
+                ttsGerman.setLanguage(Locale.GERMAN);
+                ttsEnglish = new TextToSpeech(this, status2 -> {
+                    if (status2 == TextToSpeech.SUCCESS) {
+                        ttsEnglish.setLanguage(Locale.US);
+                        // Load words after TTS is ready
+                        initSlideshow();
+                    }
+                });
             }
         });
 
@@ -123,7 +129,10 @@ public class LearnActivity extends AppCompatActivity {
         updateProgressText();
 
         // Auto-pronounce after short delay
-        autoAdvanceHandler.postDelayed(() -> speakGerman(word.getGermanWord()), 300);
+        autoAdvanceHandler.postDelayed(() -> {
+            speakGerman(word.getGermanWord());
+            autoAdvanceHandler.postDelayed(() -> speakEnglish(word.getMeaning()), 1000);
+        }, 300);
     }
 
     private void updateProgressBar() {
@@ -199,17 +208,27 @@ public class LearnActivity extends AppCompatActivity {
     }
 
     private void speakGerman(String word) {
-        if (tts != null) {
-            tts.speak(word, TextToSpeech.QUEUE_FLUSH, null, "learn_word");
+        if (ttsGerman != null) {
+            ttsGerman.speak(word, TextToSpeech.QUEUE_FLUSH, null, "learn_word");
+        }
+    }
+
+    private void speakEnglish(String word) {
+        if (ttsEnglish != null) {
+            ttsEnglish.speak(word, TextToSpeech.QUEUE_FLUSH, null, "learn_meaning");
         }
     }
 
     @Override
     protected void onDestroy() {
         stopAutoAdvance();
-        if (tts != null) {
-            tts.stop();
-            tts.shutdown();
+        if (ttsGerman != null) {
+            ttsGerman.stop();
+            ttsGerman.shutdown();
+        }
+        if (ttsEnglish != null) {
+            ttsEnglish.stop();
+            ttsEnglish.shutdown();
         }
         super.onDestroy();
     }

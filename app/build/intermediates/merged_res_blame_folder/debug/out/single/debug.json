@@ -16,12 +16,16 @@
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_input_field.xml.flat",
-        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_input_field.xml"
+        "merged": "com.learnwithhaxx.app-merged_res-32:/layout_activity_add_word.xml.flat",
+        "source": "com.learnwithhaxx.app-main-34:/layout/activity_add_word.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_rounded_card.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_rounded_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_input_field.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_input_field.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
@@ -40,20 +44,12 @@
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.learnwithhaxx.app-merged_res-32:/layout_activity_streak.xml.flat",
-        "source": "com.learnwithhaxx.app-main-34:/layout/activity_streak.xml"
-    },
-    {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\layout_activity_streak.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\layout\\activity_streak.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_progress_bar.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_progress_bar.xml"
-    },
-    {
-        "merged": "com.learnwithhaxx.app-merged_res-32:/layout_item_calendar_day.xml.flat",
-        "source": "com.learnwithhaxx.app-main-34:/layout/item_calendar_day.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_control_button.xml.flat",
@@ -72,16 +68,16 @@
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_cal_day.xml"
     },
     {
-        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\layout_item_category_header.xml.flat",
-        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\layout\\item_category_header.xml"
-    },
-    {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_error.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_error.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\layout_activity_learn.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\layout\\activity_learn.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\layout_item_category_header.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\layout\\item_category_header.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\menu_bottom_nav.xml.flat",
@@ -102,6 +98,10 @@
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_words_badge.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_words_badge.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\layout_item_calendar_day.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\layout\\item_calendar_day.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_cal_active.xml.flat",

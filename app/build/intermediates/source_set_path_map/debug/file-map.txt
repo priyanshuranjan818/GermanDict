@@ -26,10 +26,10 @@ com.learnwithhaxx.app-viewpager2-1.1.0-beta02-24 C:\Users\priya\.gradle\caches\t
 com.learnwithhaxx.app-core-runtime-2.2.0-25 C:\Users\priya\.gradle\caches\transforms-3\c4d46c66381fe03d5ba8401bfbeda42c\transformed\core-runtime-2.2.0\res
 com.learnwithhaxx.app-emoji2-views-helper-1.2.0-26 C:\Users\priya\.gradle\caches\transforms-3\e90e4c74940af4d851072a16323da8fe\transformed\emoji2-views-helper-1.2.0\res
 com.learnwithhaxx.app-activity-1.8.0-27 C:\Users\priya\.gradle\caches\transforms-3\f96519b30a247a560eaaa2d50bd68ffc\transformed\activity-1.8.0\res
-com.learnwithhaxx.app-pngs-28 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\build\generated\res\pngs\debug
-com.learnwithhaxx.app-resValues-29 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\build\generated\res\resValues\debug
-com.learnwithhaxx.app-packageDebugResources-30 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.learnwithhaxx.app-packageDebugResources-31 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.learnwithhaxx.app-merged_res-32 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\build\intermediates\merged_res\debug
-com.learnwithhaxx.app-debug-33 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\src\debug\res
-com.learnwithhaxx.app-main-34 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\src\main\res
+com.learnwithhaxx.app-pngs-28 C:\Users\priya\Desktop\GermanDict\app\build\generated\res\pngs\debug
+com.learnwithhaxx.app-resValues-29 C:\Users\priya\Desktop\GermanDict\app\build\generated\res\resValues\debug
+com.learnwithhaxx.app-packageDebugResources-30 C:\Users\priya\Desktop\GermanDict\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.learnwithhaxx.app-packageDebugResources-31 C:\Users\priya\Desktop\GermanDict\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.learnwithhaxx.app-merged_res-32 C:\Users\priya\Desktop\GermanDict\app\build\intermediates\merged_res\debug
+com.learnwithhaxx.app-debug-33 C:\Users\priya\Desktop\GermanDict\app\src\debug\res
+com.learnwithhaxx.app-main-34 C:\Users\priya\Desktop\GermanDict\app\src\main\res
