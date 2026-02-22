@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -97,6 +98,9 @@ public class LearnActivity extends AppCompatActivity {
             controlsContainer.setVisibility(View.GONE);
             return;
         }
+
+        // Shuffle the words to provide a random learning experience
+        Collections.shuffle(words);
 
         progressBar.setMax(words.size());
         updateProgressText();

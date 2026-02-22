@@ -1,4 +1,4 @@
-com.learnwithhaxx.app.test.app-androidTest-0 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\build\generated\res\resValues\androidTest\debug
-com.learnwithhaxx.app.test.app-mergeDebugAndroidTestResources-1 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.learnwithhaxx.app.test.app-mergeDebugAndroidTestResources-2 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.learnwithhaxx.app.test.app-merged_res-3 C:\Users\priya\Desktop\LearnWithHaxx\LearnWithHaxxAndroid\app\build\intermediates\merged_res\debugAndroidTest
+com.learnwithhaxx.app.test.app-androidTest-0 C:\Users\priya\Desktop\GermanDict\app\build\generated\res\resValues\androidTest\debug
+com.learnwithhaxx.app.test.app-mergeDebugAndroidTestResources-1 C:\Users\priya\Desktop\GermanDict\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.learnwithhaxx.app.test.app-mergeDebugAndroidTestResources-2 C:\Users\priya\Desktop\GermanDict\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.learnwithhaxx.app.test.app-merged_res-3 C:\Users\priya\Desktop\GermanDict\app\build\intermediates\merged_res\debugAndroidTest
