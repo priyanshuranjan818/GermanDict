@@ -41,4 +41,14 @@
             android:textColor="@color/text_tertiary"
             android:layout_marginTop="2dp" />
     </LinearLayout>
+
+    <!-- Delete Button -->
+    <ImageButton
+        android:id="@+id/deleteBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@android:drawable/ic_menu_delete"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Delete"
+        android:scaleType="centerInside" />
 </LinearLayout>

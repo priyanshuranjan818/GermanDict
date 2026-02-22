@@ -24,6 +24,7 @@
         <activity android:name=".AddWordActivity" />
         <activity android:name=".LearnActivity" />
         <activity android:name=".StreakActivity" />
+        <activity android:name=".VerbConjugationActivity" />
 
     </application>
 

@@ -3304,8 +3304,8 @@ id edge
 id edit_query
 id elastic
 id embed
-id emptyManage
 id emptyState
+id emptyVerbs
 id end
 id endToStart
 id enterAlways
@@ -3329,6 +3329,12 @@ id fixed
 id flip
 id floating
 id forever
+id formDu
+id formErSieEs
+id formIch
+id formIhr
+id formSieSie
+id formWir
 id fragment_container_view_tag
 id frost
 id fullscreen_header
@@ -3343,6 +3349,7 @@ id group_divider
 id grouping
 id groups
 id header
+id headerContainer
 id header_title
 id hideable
 id home
@@ -3380,7 +3387,6 @@ id linear
 id listMode
 id list_item
 id m3_side_sheet
-id manageRecyclerView
 id marquee
 id masked
 id match_constraint
@@ -3445,6 +3451,7 @@ id nav_add
 id nav_home
 id nav_learn
 id nav_streak
+id nav_verbs
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3643,6 +3650,10 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id verbExpandableList
+id verbInfinitive
+id verbMeaning
+id verbTotalCount
 id vertical_only
 id view_offset_helper
 id view_transition
@@ -3782,6 +3793,7 @@ layout activity_add_word
 layout activity_learn
 layout activity_main
 layout activity_streak
+layout activity_verbs
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3800,6 +3812,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout item_calendar_day
 layout item_category_header
+layout item_verb_conjugation
 layout item_word
 layout item_word_manage
 layout m3_alert_dialog
@@ -4037,6 +4050,9 @@ string nav_add
 string nav_home
 string nav_learn
 string nav_streak
+string nav_verbs
+string no_verbs_found
+string no_verbs_found_sub
 string no_words_learn
 string no_words_learn_sub
 string no_words_managed
@@ -4064,6 +4080,7 @@ string streak_calendar
 string streak_goal
 string streak_society
 string streak_title
+string verb_conjugations
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

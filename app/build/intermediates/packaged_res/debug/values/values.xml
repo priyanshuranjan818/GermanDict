@@ -70,6 +70,9 @@
     <string name="nav_home">Home</string>
     <string name="nav_learn">Learn</string>
     <string name="nav_streak">Streak</string>
+    <string name="nav_verbs">Verbs</string>
+    <string name="no_verbs_found">No verbs added yet.</string>
+    <string name="no_verbs_found_sub">Add words with the category \'Verb\' to see them here.</string>
     <string name="no_words_learn">No words to learn!</string>
     <string name="no_words_learn_sub">Add some words first, then come back.</string>
     <string name="no_words_managed">No words added yet.</string>
@@ -85,6 +88,7 @@
     <string name="streak_goal">Streak Goal</string>
     <string name="streak_society">STREAK SOCIETY</string>
     <string name="streak_title">Streak</string>
+    <string name="verb_conjugations">Verb Conjugations</string>
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/green_primary</item>
         <item name="colorPrimaryDark">@color/green_dark</item>

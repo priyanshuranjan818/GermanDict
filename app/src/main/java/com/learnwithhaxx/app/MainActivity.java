@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -142,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, LearnActivity.class));
                 return true;
             }
+            if (id == R.id.nav_verbs) {
+                startActivity(new Intent(this, VerbConjugationActivity.class));
+                return true;
+            }
             if (id == R.id.nav_streak) {
                 startActivity(new Intent(this, StreakActivity.class));
                 return true;
@@ -253,10 +258,23 @@ public class MainActivity extends AppCompatActivity {
             TextView germanWord = convertView.findViewById(R.id.germanWord);
             TextView meaning = convertView.findViewById(R.id.wordMeaning);
             ImageButton speakBtn = convertView.findViewById(R.id.speakBtn);
+            ImageButton deleteBtn = convertView.findViewById(R.id.deleteBtn);
 
             germanWord.setText(word.getGermanWord());
             meaning.setText(word.getMeaning());
             speakBtn.setOnClickListener(v -> speakGerman(word.getGermanWord()));
+            
+            deleteBtn.setOnClickListener(v -> {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Delete Word")
+                        .setMessage("Delete \"" + word.getGermanWord() + "\"?")
+                        .setPositiveButton("Delete", (d, w) -> {
+                            db.deleteWord(word.getId());
+                            loadData();
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            });
 
             convertView.setPadding(60, 0, 0, 0);
             return convertView;

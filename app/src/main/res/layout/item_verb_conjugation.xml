@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/headerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="bottom">
+
+            <TextView
+                android:id="@+id/verbInfinitive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Machen"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:id="@+id/verbMeaning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="to do / make"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="2dp" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="3"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false">
+
+            <!-- ich -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ich"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_tertiary" />
+                <TextView
+                    android:id="@+id/formIch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="mache"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_primary" />
+            </LinearLayout>
+
+            <!-- wir -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="wir"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_tertiary" />
+                <TextView
+                    android:id="@+id/formWir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="machen"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_primary" />
+            </LinearLayout>
+
+            <!-- du -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="du"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_tertiary" />
+                <TextView
+                    android:id="@+id/formDu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="machst"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_primary" />
+            </LinearLayout>
+
+            <!-- ihr -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ihr"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_tertiary" />
+                <TextView
+                    android:id="@+id/formIhr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="macht"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_primary" />
+            </LinearLayout>
+
+            <!-- er/sie/es -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="er/sie/es"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_tertiary" />
+                <TextView
+                    android:id="@+id/formErSieEs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="macht"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_primary" />
+            </LinearLayout>
+
+            <!-- sie/Sie -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sie/Sie"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_tertiary" />
+                <TextView
+                    android:id="@+id/formSieSie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="machen"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue_primary" />
+            </LinearLayout>
+        </GridLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

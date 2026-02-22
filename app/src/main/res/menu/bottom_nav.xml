@@ -13,6 +13,10 @@
         android:icon="@android:drawable/ic_menu_edit"
         android:title="@string/nav_learn" />
     <item
+        android:id="@+id/nav_verbs"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="@string/nav_verbs" />
+    <item
         android:id="@+id/nav_streak"
         android:icon="@android:drawable/ic_menu_recent_history"
         android:title="@string/nav_streak" />

@@ -3,9 +3,7 @@ package com.learnwithhaxx.app;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -13,12 +11,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -37,8 +32,6 @@ public class AddWordActivity extends AppCompatActivity {
     private EditText inputGermanWord, inputMeaning, inputExample;
     private Spinner spinnerPartOfSpeech;
     private TextView errorMessage;
-    private RecyclerView manageRecyclerView;
-    private TextView emptyManage;
     private ImageButton exportImportBtn;
 
     @Override
@@ -54,11 +47,7 @@ public class AddWordActivity extends AppCompatActivity {
         inputExample = findViewById(R.id.inputExample);
         spinnerPartOfSpeech = findViewById(R.id.spinnerPartOfSpeech);
         errorMessage = findViewById(R.id.errorMessage);
-        manageRecyclerView = findViewById(R.id.manageRecyclerView);
-        emptyManage = findViewById(R.id.emptyManage);
         exportImportBtn = findViewById(R.id.exportImportBtn);
-
-        manageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Back button
         findViewById(R.id.backBtn).setOnClickListener(v -> finish());
@@ -72,9 +61,6 @@ public class AddWordActivity extends AppCompatActivity {
 
         // Bottom Navigation
         setupBottomNav();
-
-        // Load existing words
-        loadManageList();
     }
 
     private void showExportImportDialog() {
@@ -171,7 +157,6 @@ public class AddWordActivity extends AppCompatActivity {
                 }
             }
             reader.close();
-            loadManageList();
             Toast.makeText(this, "Imported " + count + " new words!", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, "Import failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -192,12 +177,6 @@ public class AddWordActivity extends AppCompatActivity {
             return str.replace("\"\"", "\"");
         }
         return str;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadManageList();
     }
 
     private void saveWord() {
@@ -238,33 +217,8 @@ public class AddWordActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Word added!", Toast.LENGTH_SHORT).show();
 
-        // Reload manage list
-        loadManageList();
-
         // Focus back to first input
         inputGermanWord.requestFocus();
-    }
-
-    private void loadManageList() {
-        List<Word> words = db.getAllWords();
-        if (words.isEmpty()) {
-            manageRecyclerView.setVisibility(View.GONE);
-            emptyManage.setVisibility(View.VISIBLE);
-        } else {
-            manageRecyclerView.setVisibility(View.VISIBLE);
-            emptyManage.setVisibility(View.GONE);
-            manageRecyclerView.setAdapter(new ManageAdapter(words, word -> {
-                new AlertDialog.Builder(AddWordActivity.this)
-                        .setTitle("Delete Word")
-                        .setMessage("Delete \"" + word.getGermanWord() + "\"?")
-                        .setPositiveButton("Delete", (d, w) -> {
-                            db.deleteWord(word.getId());
-                            loadManageList();
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .show();
-            }));
-        }
     }
 
     private void setupBottomNav() {
@@ -281,72 +235,14 @@ public class AddWordActivity extends AppCompatActivity {
             } else if (id == R.id.nav_learn) {
                 startActivity(new Intent(this, LearnActivity.class));
                 return true;
+            } else if (id == R.id.nav_verbs) {
+                startActivity(new Intent(this, VerbConjugationActivity.class));
+                return true;
             } else if (id == R.id.nav_streak) {
                 startActivity(new Intent(this, StreakActivity.class));
                 return true;
             }
             return false;
         });
-    }
-
-    // ─── Manage Adapter ──────────────────────────────────
-
-    public interface OnDeleteClickListener {
-        void onDelete(Word word);
-    }
-
-    private static class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.VH> {
-        private final List<Word> words;
-        private final OnDeleteClickListener deleteListener;
-
-        ManageAdapter(List<Word> words, OnDeleteClickListener deleteListener) {
-            this.words = words;
-            this.deleteListener = deleteListener;
-        }
-
-        @NonNull
-        @Override
-        public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_word_manage, parent, false);
-            return new VH(v);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull VH holder, int position) {
-            Word word = words.get(position);
-            holder.germanWord.setText(word.getGermanWord());
-            holder.meaning.setText(word.getMeaning());
-
-            if (word.getPartOfSpeech() != null && !word.getPartOfSpeech().isEmpty()) {
-                holder.category.setText(word.getPartOfSpeech());
-                holder.category.setVisibility(View.VISIBLE);
-            } else {
-                holder.category.setVisibility(View.GONE);
-            }
-
-            holder.deleteBtn.setOnClickListener(v -> {
-                if (deleteListener != null) {
-                    deleteListener.onDelete(word);
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return words.size();
-        }
-
-        static class VH extends RecyclerView.ViewHolder {
-            TextView germanWord, meaning, category;
-            View deleteBtn;
-            VH(View v) {
-                super(v);
-                germanWord = v.findViewById(R.id.germanWord);
-                meaning = v.findViewById(R.id.wordMeaning);
-                category = v.findViewById(R.id.wordCategory);
-                deleteBtn = v.findViewById(R.id.deleteBtn);
-            }
-        }
     }
 }

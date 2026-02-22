@@ -45,11 +45,12 @@
     </LinearLayout>
 
     <!-- Scrollable Content -->
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header"
-        android:layout_above="@id/bottomNav">
+        android:layout_above="@id/bottomNav"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -187,41 +188,12 @@
                     android:layout_marginTop="8dp" />
             </LinearLayout>
 
-            <!-- Divider -->
             <View
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:background="@color/bg_light" />
+                android:layout_height="100dp" />
 
-            <!-- Manage Words Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/manage_your_words"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:padding="20dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/manageRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
-
-            <!-- Empty manage state -->
-            <TextView
-                android:id="@+id/emptyManage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/no_words_managed"
-                android:textSize="14sp"
-                android:textColor="@color/text_tertiary"
-                android:gravity="center"
-                android:padding="40dp"
-                android:visibility="gone" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

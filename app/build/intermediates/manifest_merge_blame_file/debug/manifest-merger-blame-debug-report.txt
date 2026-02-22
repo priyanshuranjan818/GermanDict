@@ -19,7 +19,7 @@
 15-->[androidx.core:core:1.9.0] C:\Users\priya\.gradle\caches\transforms-3\75919e89ab9acfe92b320b18b5eba894\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
 15-->[androidx.core:core:1.9.0] C:\Users\priya\.gradle\caches\transforms-3\75919e89ab9acfe92b320b18b5eba894\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 16    <application
-16-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:7:5-28:19
+16-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:7:5-29:19
 17        android:allowBackup="true"
 17-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:8:9-35
 18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -34,35 +34,37 @@
 23-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:11:9-54
 24        android:supportsRtl="true"
 24-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:12:9-35
-25        android:testOnly="true"
-26        android:theme="@style/AppTheme" >
-26-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:13:9-40
-27        <activity
-27-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:15:9-22:20
-28            android:name="com.learnwithhaxx.app.MainActivity"
-28-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:16:13-41
-29            android:exported="true" >
-29-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:17:13-36
-30            <intent-filter>
-30-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:18:13-21:29
-31                <action android:name="android.intent.action.MAIN" />
-31-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:19:17-69
-31-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:19:25-66
-32
-33                <category android:name="android.intent.category.LAUNCHER" />
-33-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:20:17-77
-33-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:20:27-74
-34            </intent-filter>
-35        </activity>
-36        <activity android:name="com.learnwithhaxx.app.AddWordActivity" />
-36-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:24:9-53
-36-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:24:19-50
-37        <activity android:name="com.learnwithhaxx.app.LearnActivity" />
-37-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:25:9-51
-37-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:25:19-48
-38        <activity android:name="com.learnwithhaxx.app.StreakActivity" />
-38-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:26:9-52
-38-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:26:19-49
+25        android:theme="@style/AppTheme" >
+25-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:13:9-40
+26        <activity
+26-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:15:9-22:20
+27            android:name="com.learnwithhaxx.app.MainActivity"
+27-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:16:13-41
+28            android:exported="true" >
+28-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:17:13-36
+29            <intent-filter>
+29-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:18:13-21:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:19:17-69
+30-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:19:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:20:17-77
+32-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:20:27-74
+33            </intent-filter>
+34        </activity>
+35        <activity android:name="com.learnwithhaxx.app.AddWordActivity" />
+35-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:24:9-53
+35-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:24:19-50
+36        <activity android:name="com.learnwithhaxx.app.LearnActivity" />
+36-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:25:9-51
+36-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:25:19-48
+37        <activity android:name="com.learnwithhaxx.app.StreakActivity" />
+37-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:26:9-52
+37-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:26:19-49
+38        <activity android:name="com.learnwithhaxx.app.VerbConjugationActivity" />
+38-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:27:9-61
+38-->C:\Users\priya\Desktop\GermanDict\app\src\main\AndroidManifest.xml:27:19-58
 39
 40        <provider
 40-->[androidx.emoji2:emoji2:1.2.0] C:\Users\priya\.gradle\caches\transforms-3\4db699d37aeb53b95d33ff3db7cc3cca\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
