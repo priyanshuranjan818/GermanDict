@@ -57,12 +57,19 @@ public class VerbConjugationActivity extends AppCompatActivity {
         });
 
         expandableListView.setOnGroupCollapseListener(groupPosition -> {
-            // This is handled by the back button usually, but just in case
             if (isolatedGroupIndex != -1) {
                 isolatedGroupIndex = -1;
                 adapter.notifyDataSetChanged();
             }
         });
+
+        // The practice button in this activity's header
+        View btnPractice = findViewById(R.id.btnPractice);
+        if (btnPractice != null) {
+            btnPractice.setOnClickListener(v -> {
+                startActivity(new Intent(this, MatchWordsActivity.class));
+            });
+        }
     }
 
     @Override
@@ -77,7 +84,7 @@ public class VerbConjugationActivity extends AppCompatActivity {
         
         for (String category : grouped.keySet()) {
             String lowerCat = category.toLowerCase();
-            if (lowerCat.equals("verb") || lowerCat.startsWith("verb ")) {
+            if (lowerCat.contains("verb")) {
                 verbs.addAll(grouped.get(category));
             }
         }
@@ -107,7 +114,9 @@ public class VerbConjugationActivity extends AppCompatActivity {
 
     private void setupBottomNav() {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
-        bottomNav.setSelectedItemId(R.id.nav_verbs);
+        // Since nav_verbs is removed and replaced by nav_practice, 
+        // we don't highlight any item here or we could highlight nav_practice if this is part of it.
+        bottomNav.setSelectedItemId(R.id.nav_practice); 
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
@@ -116,14 +125,19 @@ public class VerbConjugationActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.nav_add) {
                 startActivity(new Intent(this, AddWordActivity.class));
+                finish();
                 return true;
             } else if (id == R.id.nav_learn) {
                 startActivity(new Intent(this, LearnActivity.class));
+                finish();
                 return true;
-            } else if (id == R.id.nav_verbs) {
+            } else if (id == R.id.nav_practice) {
+                startActivity(new Intent(this, MatchWordsActivity.class));
+                finish();
                 return true;
             } else if (id == R.id.nav_streak) {
                 startActivity(new Intent(this, StreakActivity.class));
+                finish();
                 return true;
             }
             return false;

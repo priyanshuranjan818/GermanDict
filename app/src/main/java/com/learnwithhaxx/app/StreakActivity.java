@@ -2,14 +2,11 @@ package com.learnwithhaxx.app;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -185,8 +182,13 @@ public class StreakActivity extends AppCompatActivity {
             } else if (id == R.id.nav_learn) {
                 startActivity(new Intent(this, LearnActivity.class));
                 return true;
+            } else if (id == R.id.nav_practice) {
+                startActivity(new Intent(this, MatchWordsActivity.class));
+                return true;
+            } else if (id == R.id.nav_streak) {
+                return true;
             }
-            return id == R.id.nav_streak;
+            return false;
         });
     }
 }

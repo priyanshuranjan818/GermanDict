@@ -126,26 +126,6 @@
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="20dp" />
 
-                <!-- Part of Speech -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/part_of_speech"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_secondary"
-                    android:textAllCaps="true"
-                    android:letterSpacing="0.03" />
-                <Spinner
-                    android:id="@+id/spinnerPartOfSpeech"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_input_field"
-                    android:paddingHorizontal="16dp"
-                    android:entries="@array/parts_of_speech"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="20dp" />
-
                 <!-- Example -->
                 <TextView
                     android:layout_width="wrap_content"

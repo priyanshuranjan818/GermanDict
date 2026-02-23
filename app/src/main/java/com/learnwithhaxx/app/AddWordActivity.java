@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +29,6 @@ public class AddWordActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
     private EditText inputGermanWord, inputMeaning, inputExample;
-    private Spinner spinnerPartOfSpeech;
     private TextView errorMessage;
     private ImageButton exportImportBtn;
 
@@ -45,7 +43,6 @@ public class AddWordActivity extends AppCompatActivity {
         inputGermanWord = findViewById(R.id.inputGermanWord);
         inputMeaning = findViewById(R.id.inputMeaning);
         inputExample = findViewById(R.id.inputExample);
-        spinnerPartOfSpeech = findViewById(R.id.spinnerPartOfSpeech);
         errorMessage = findViewById(R.id.errorMessage);
         exportImportBtn = findViewById(R.id.exportImportBtn);
 
@@ -67,8 +64,8 @@ public class AddWordActivity extends AppCompatActivity {
         String[] options = {"Export Words (CSV)", "Import Words (CSV)"};
         new AlertDialog.Builder(this)
                 .setTitle("Backup & Restore")
-                .setItems(options, (dialog, which) -> {
-                    if (which == 0) {
+                .setItems(options, (dialog, prefix) -> {
+                    if (prefix == 0) {
                         exportWords();
                     } else {
                         importWords();
@@ -183,17 +180,11 @@ public class AddWordActivity extends AppCompatActivity {
         String germanWord = inputGermanWord.getText().toString().trim();
         String meaning = inputMeaning.getText().toString().trim();
         String example = inputExample.getText().toString().trim();
-        int spinnerPos = spinnerPartOfSpeech.getSelectedItemPosition();
-        String partOfSpeech = spinnerPos > 0 ? spinnerPartOfSpeech.getSelectedItem().toString() : "";
+        String partOfSpeech = "General"; // Default category since it's removed from UI
 
         // Validate
         if (germanWord.isEmpty() || meaning.isEmpty()) {
             Toast.makeText(this, "Please fill in the German word and meaning", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (spinnerPos == 0) {
-            Toast.makeText(this, "Please choose a category", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -212,7 +203,6 @@ public class AddWordActivity extends AppCompatActivity {
         inputGermanWord.setText("");
         inputMeaning.setText("");
         inputExample.setText("");
-        spinnerPartOfSpeech.setSelection(0);
         errorMessage.setVisibility(View.GONE);
 
         Toast.makeText(this, "Word added!", Toast.LENGTH_SHORT).show();
@@ -235,8 +225,8 @@ public class AddWordActivity extends AppCompatActivity {
             } else if (id == R.id.nav_learn) {
                 startActivity(new Intent(this, LearnActivity.class));
                 return true;
-            } else if (id == R.id.nav_verbs) {
-                startActivity(new Intent(this, VerbConjugationActivity.class));
+            } else if (id == R.id.nav_practice) {
+                startActivity(new Intent(this, MatchWordsActivity.class));
                 return true;
             } else if (id == R.id.nav_streak) {
                 startActivity(new Intent(this, StreakActivity.class));

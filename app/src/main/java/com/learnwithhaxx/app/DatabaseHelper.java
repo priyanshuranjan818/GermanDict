@@ -139,8 +139,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Word> getAllWords() {
         List<Word> words = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
+        // Changed ORDER BY from date_added DESC to id DESC to ensure newest words are always at the top
         Cursor c = db.rawQuery(
-                "SELECT * FROM " + TABLE_WORDS + " WHERE user_id = 1 ORDER BY date_added DESC", null);
+                "SELECT * FROM " + TABLE_WORDS + " WHERE user_id = 1 ORDER BY id DESC", null);
         while (c.moveToNext()) {
             words.add(cursorToWord(c));
         }
@@ -151,8 +152,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Map<String, List<Word>> getWordsByCategory() {
         Map<String, List<Word>> grouped = new LinkedHashMap<>();
         SQLiteDatabase db = getReadableDatabase();
+        // Changed ORDER BY to use id DESC within categories
         Cursor c = db.rawQuery(
-                "SELECT * FROM " + TABLE_WORDS + " WHERE user_id = 1 ORDER BY part_of_speech, date_added DESC",
+                "SELECT * FROM " + TABLE_WORDS + " WHERE user_id = 1 ORDER BY part_of_speech, id DESC",
                 null);
         while (c.moveToNext()) {
             Word w = cursorToWord(c);

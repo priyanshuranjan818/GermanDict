@@ -1,5 +1,6 @@
 package com.learnwithhaxx.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,6 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Collections;
 import java.util.List;
@@ -87,6 +90,7 @@ public class LearnActivity extends AppCompatActivity {
         });
 
         autoAdvanceHandler = new Handler(Looper.getMainLooper());
+        setupBottomNav();
     }
 
     private void initSlideshow() {
@@ -221,6 +225,32 @@ public class LearnActivity extends AppCompatActivity {
         if (ttsEnglish != null) {
             ttsEnglish.speak(word, TextToSpeech.QUEUE_FLUSH, null, "learn_meaning");
         }
+    }
+
+    private void setupBottomNav() {
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        if (bottomNav == null) return;
+        bottomNav.setSelectedItemId(R.id.nav_learn);
+        bottomNav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                return true;
+            } else if (id == R.id.nav_add) {
+                startActivity(new Intent(this, AddWordActivity.class));
+                return true;
+            } else if (id == R.id.nav_learn) {
+                return true;
+            } else if (id == R.id.nav_practice) {
+                startActivity(new Intent(this, MatchWordsActivity.class));
+                return true;
+            } else if (id == R.id.nav_streak) {
+                startActivity(new Intent(this, StreakActivity.class));
+                return true;
+            }
+            return false;
+        });
     }
 
     @Override

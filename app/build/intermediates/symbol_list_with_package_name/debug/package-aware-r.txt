@@ -3009,6 +3009,9 @@ drawable bg_control_button
 drawable bg_error
 drawable bg_git_square
 drawable bg_input_field
+drawable bg_match_card_correct
+drawable bg_match_card_selected
+drawable bg_match_card_wrong
 drawable bg_pause_button
 drawable bg_progress_bar
 drawable bg_rounded_card
@@ -3218,12 +3221,14 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btnPractice
 id buttonPanel
 id cache_measures
 id calNext
 id calPrev
 id callMeasure
 id cancel_button
+id cardText
 id carryVelocity
 id categoryArrow
 id categoryCount
@@ -3245,6 +3250,7 @@ id clear_text
 id clip_horizontal
 id clip_vertical
 id clockwise
+id closeBtn
 id closest
 id collapseActionView
 id compress
@@ -3254,6 +3260,7 @@ id container
 id content
 id contentPanel
 id contiguous
+id continueBtn
 id continuousVelocity
 id controlsContainer
 id coordinator
@@ -3369,6 +3376,7 @@ id info
 id inputExample
 id inputGermanWord
 id inputMeaning
+id instructionTitle
 id invisible
 id inward
 id is_pooling_container_tag
@@ -3379,6 +3387,7 @@ id jumpToStart
 id labeled
 id layout
 id left
+id leftColumn
 id leftToRight
 id legacy
 id line1
@@ -3389,6 +3398,7 @@ id list_item
 id m3_side_sheet
 id marquee
 id masked
+id matchProgressBar
 id match_constraint
 id match_parent
 id material_clock_display
@@ -3450,8 +3460,8 @@ id multiply
 id nav_add
 id nav_home
 id nav_learn
+id nav_practice
 id nav_streak
-id nav_verbs
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3520,6 +3530,7 @@ id rectangles
 id report_drawn
 id reverseSawtooth
 id right
+id rightColumn
 id rightToLeft
 id right_icon
 id right_side
@@ -3571,7 +3582,6 @@ id south
 id spacer
 id speakBtn
 id special_effects_controller_view_tag
-id spinnerPartOfSpeech
 id spline
 id split_action_bar
 id spread
@@ -3597,6 +3607,7 @@ id stretch
 id submenuarrow
 id submitBtn
 id submit_area
+id successOverlay
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -3668,8 +3679,8 @@ id withText
 id with_icon
 id withinBounds
 id wordCategory
-id wordExpandableList
 id wordMeaning
+id wordRecyclerView
 id wrap
 id wrap_content
 id wrap_content_constrained
@@ -3792,6 +3803,7 @@ layout abc_tooltip
 layout activity_add_word
 layout activity_learn
 layout activity_main
+layout activity_match_words
 layout activity_streak
 layout activity_verbs
 layout custom_dialog
@@ -3812,6 +3824,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout item_calendar_day
 layout item_category_header
+layout item_match_card
 layout item_verb_conjugation
 layout item_word
 layout item_word_manage
