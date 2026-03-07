@@ -8,6 +8,7 @@ import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -31,6 +32,7 @@ public class LearnActivity extends AppCompatActivity {
     private List<Word> words;
     private int currentIndex = 0;
     private boolean isPaused = false;
+    private boolean shouldShuffle = true;
 
     private Handler autoAdvanceHandler;
     private Runnable autoAdvanceRunnable;
@@ -50,6 +52,7 @@ public class LearnActivity extends AppCompatActivity {
         setContentView(R.layout.activity_learn);
 
         db = DatabaseHelper.getInstance(this);
+        shouldShuffle = getIntent().getBooleanExtra("shuffle", true);
 
         // Views
         progressBar = findViewById(R.id.progressBar);
@@ -103,8 +106,9 @@ public class LearnActivity extends AppCompatActivity {
             return;
         }
 
-        // Shuffle the words to provide a random learning experience
-        Collections.shuffle(words);
+        if (shouldShuffle) {
+            Collections.shuffle(words);
+        }
 
         progressBar.setMax(words.size());
         updateProgressText();
@@ -120,14 +124,25 @@ public class LearnActivity extends AppCompatActivity {
 
         Word word = words.get(currentIndex);
 
-        // Animate slide in
-        Animation slideIn = new TranslateAnimation(0, 0, 60, 0);
-        slideIn.setDuration(300);
+        // Animation logic
+        AnimationSet animationSet = new AnimationSet(true);
+        
+        // If not shuffling (recent mode), use top-to-bottom slide
+        float fromY = shouldShuffle ? 60f : -100f;
+        Animation slide = new TranslateAnimation(0, 0, fromY, 0);
+        slide.setDuration(400);
+        
         Animation fadeIn = new AlphaAnimation(0f, 1f);
-        fadeIn.setDuration(300);
+        fadeIn.setDuration(400);
 
-        slideWord.startAnimation(fadeIn);
-        slideMeaning.startAnimation(fadeIn);
+        animationSet.addAnimation(slide);
+        animationSet.addAnimation(fadeIn);
+
+        slideWord.startAnimation(animationSet);
+        slideMeaning.startAnimation(animationSet);
+        if (slideExample.getVisibility() == View.VISIBLE) {
+            slideExample.startAnimation(animationSet);
+        }
 
         slideWord.setText(word.getGermanWord());
         slideMeaning.setText(word.getMeaning());

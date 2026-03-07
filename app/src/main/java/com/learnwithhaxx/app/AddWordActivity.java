@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddWordActivity extends AppCompatActivity {
@@ -131,16 +132,26 @@ public class AddWordActivity extends AppCompatActivity {
             InputStream inputStream = getContentResolver().openInputStream(uri);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
-            int count = 0;
-            boolean firstLine = true;
+            List<String> lines = new ArrayList<>();
             
             while ((line = reader.readLine()) != null) {
-                if (firstLine) {
-                    firstLine = false;
-                    if (line.toLowerCase().contains("german")) continue; 
-                }
-                
-                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                lines.add(line);
+            }
+            reader.close();
+
+            if (lines.isEmpty()) return;
+
+            int startIndex = 0;
+            // Check if first line is header
+            if (lines.get(0).toLowerCase().contains("german")) {
+                startIndex = 1;
+            }
+
+            int count = 0;
+            // Iterate backwards so the top word in CSV is inserted last and appears at the top (since list is ordered by id DESC)
+            for (int i = lines.size() - 1; i >= startIndex; i--) {
+                String l = lines.get(i);
+                String[] parts = l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 if (parts.length >= 2) {
                     String german = unescapeCsv(parts[0]);
                     String meaning = unescapeCsv(parts[1]);
@@ -153,7 +164,7 @@ public class AddWordActivity extends AppCompatActivity {
                     }
                 }
             }
-            reader.close();
+
             Toast.makeText(this, "Imported " + count + " new words!", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, "Import failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();

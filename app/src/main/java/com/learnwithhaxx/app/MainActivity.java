@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout emptyState;
     private TextView streakCount;
     private TextView todayCount;
+    private TextView totalWordCount;
+    private SearchView searchView;
+    private TextView headerTitle;
     
     private WordAdapter adapter;
     private List<Word> wordList = new ArrayList<>();
@@ -45,11 +49,48 @@ public class MainActivity extends AppCompatActivity {
         emptyState = findViewById(R.id.emptyState);
         streakCount = findViewById(R.id.streakCount);
         todayCount = findViewById(R.id.todayCount);
+        totalWordCount = findViewById(R.id.totalWordCount);
+        searchView = findViewById(R.id.searchView);
+        headerTitle = findViewById(R.id.headerTitle);
 
         wordRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         findViewById(R.id.streakBadge).setOnClickListener(v -> {
             startActivity(new Intent(this, StreakActivity.class));
+        });
+
+        findViewById(R.id.learnRecentBtn).setOnClickListener(v -> {
+            Intent intent = new Intent(this, LearnActivity.class);
+            intent.putExtra("shuffle", false);
+            startActivity(intent);
+        });
+
+        // The Total Words badge now acts as the Search trigger
+        findViewById(R.id.totalWordsSearchBtn).setOnClickListener(v -> {
+            if (searchView.getVisibility() == View.VISIBLE) {
+                closeSearch();
+            } else {
+                openSearch();
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterWords(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterWords(newText);
+                return true;
+            }
+        });
+
+        searchView.setOnCloseListener(() -> {
+            closeSearch();
+            return false;
         });
 
         tts = new TextToSpeech(this, status -> {
@@ -59,6 +100,40 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setupBottomNav();
+    }
+
+    private void openSearch() {
+        searchView.setVisibility(View.VISIBLE);
+        headerTitle.setVisibility(View.GONE);
+        searchView.requestFocus();
+        searchView.setIconified(false);
+    }
+
+    private void closeSearch() {
+        searchView.setVisibility(View.GONE);
+        headerTitle.setVisibility(View.VISIBLE);
+        searchView.setQuery("", false);
+        if (adapter != null) {
+            adapter.updateList(wordList);
+        }
+    }
+
+    private void filterWords(String query) {
+        if (query.isEmpty()) {
+            if (adapter != null) adapter.updateList(wordList);
+            return;
+        }
+        
+        List<Word> filteredList = new ArrayList<>();
+        for (Word word : wordList) {
+            if (word.getGermanWord().toLowerCase().contains(query.toLowerCase()) ||
+                word.getMeaning().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(word);
+            }
+        }
+        if (adapter != null) {
+            adapter.updateList(filteredList);
+        }
     }
 
     @Override
@@ -74,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         todayCount.setText(count + " / 5");
 
         wordList = db.getAllWords();
+        totalWordCount.setText(String.valueOf(wordList.size()));
 
         if (wordList.isEmpty()) {
             wordRecyclerView.setVisibility(View.GONE);
@@ -83,6 +159,11 @@ public class MainActivity extends AppCompatActivity {
             emptyState.setVisibility(View.GONE);
             adapter = new WordAdapter(wordList);
             wordRecyclerView.setAdapter(adapter);
+        }
+        
+        // Refresh search if active
+        if (searchView.getVisibility() == View.VISIBLE) {
+            filterWords(searchView.getQuery().toString());
         }
     }
 
@@ -132,6 +213,11 @@ public class MainActivity extends AppCompatActivity {
 
         public WordAdapter(List<Word> words) {
             this.words = words;
+        }
+
+        public void updateList(List<Word> newList) {
+            this.words = newList;
+            notifyDataSetChanged();
         }
 
         @NonNull

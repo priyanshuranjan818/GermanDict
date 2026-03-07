@@ -3009,15 +3009,18 @@ drawable bg_control_button
 drawable bg_error
 drawable bg_git_square
 drawable bg_input_field
+drawable bg_learn_badge
 drawable bg_match_card_correct
 drawable bg_match_card_selected
 drawable bg_match_card_wrong
 drawable bg_pause_button
 drawable bg_progress_bar
 drawable bg_rounded_card
+drawable bg_search_circle
 drawable bg_streak_badge
 drawable bg_streak_society
 drawable bg_submit_button
+drawable bg_total_badge
 drawable bg_words_badge
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
@@ -3357,6 +3360,7 @@ id grouping
 id groups
 id header
 id headerContainer
+id headerTitle
 id header_title
 id hideable
 id home
@@ -3386,6 +3390,7 @@ id jumpToEnd
 id jumpToStart
 id labeled
 id layout
+id learnRecentBtn
 id left
 id leftColumn
 id leftToRight
@@ -3546,6 +3551,7 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
+id searchView
 id search_badge
 id search_bar
 id search_button
@@ -3647,6 +3653,8 @@ id todayCount
 id toggle
 id top
 id topPanel
+id totalWordCount
+id totalWordsSearchBtn
 id touch_outside
 id transitionToEnd
 id transitionToStart
