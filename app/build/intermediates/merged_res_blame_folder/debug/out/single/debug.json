@@ -4,24 +4,24 @@
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_streak_society.xml"
     },
     {
-        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_git_square.xml.flat",
-        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_git_square.xml"
-    },
-    {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\color_bottom_nav_color.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\color\\bottom_nav_color.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_git_square.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_git_square.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_input_field.xml.flat",
-        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_input_field.xml"
-    },
-    {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_rounded_card.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_rounded_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_input_field.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_input_field.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_search_circle.xml.flat",
@@ -42,6 +42,10 @@
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_streak_badge.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_streak_badge.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_das_badge.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_das_badge.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_match_card_selected.xml.flat",
@@ -68,12 +72,16 @@
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_progress_bar.xml"
     },
     {
-        "merged": "com.learnwithhaxx.app-merged_res-32:/layout_activity_main.xml.flat",
-        "source": "com.learnwithhaxx.app-main-34:/layout/activity_main.xml"
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\layout_activity_nouns.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\layout\\activity_nouns.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\layout_item_verb_conjugation.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\layout\\item_verb_conjugation.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_die_badge.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_die_badge.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_control_button.xml.flat",
@@ -124,8 +132,8 @@
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\layout\\item_word.xml"
     },
     {
-        "merged": "com.learnwithhaxx.app-merged_res-32:/drawable_bg_total_badge.xml.flat",
-        "source": "com.learnwithhaxx.app-main-34:/drawable/bg_total_badge.xml"
+        "merged": "com.learnwithhaxx.app-merged_res-32:/layout_activity_nouns.xml.flat",
+        "source": "com.learnwithhaxx.app-main-34:/layout/activity_nouns.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_submit_button.xml.flat",
@@ -134,6 +142,10 @@
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_words_badge.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_words_badge.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_total_badge.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_total_badge.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_match_card_correct.xml.flat",
@@ -146,6 +158,10 @@
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_cal_active.xml.flat",
         "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_cal_active.xml"
+    },
+    {
+        "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\drawable_bg_der_badge.xml.flat",
+        "source": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-main-34:\\drawable\\bg_der_badge.xml"
     },
     {
         "merged": "C:\\Users\\priya\\.gradle\\daemon\\8.5\\com.learnwithhaxx.app-merged_res-32:\\layout_activity_main.xml.flat",

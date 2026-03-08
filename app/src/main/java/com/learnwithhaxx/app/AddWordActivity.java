@@ -191,7 +191,13 @@ public class AddWordActivity extends AppCompatActivity {
         String germanWord = inputGermanWord.getText().toString().trim();
         String meaning = inputMeaning.getText().toString().trim();
         String example = inputExample.getText().toString().trim();
-        String partOfSpeech = "General"; // Default category since it's removed from UI
+        
+        // Auto-assign category Nomen if it starts with der/die/das
+        String lowerWord = germanWord.toLowerCase();
+        String partOfSpeech = "General";
+        if (lowerWord.startsWith("der ") || lowerWord.startsWith("die ") || lowerWord.startsWith("das ")) {
+            partOfSpeech = "Nomen";
+        }
 
         // Validate
         if (germanWord.isEmpty() || meaning.isEmpty()) {
@@ -233,14 +239,17 @@ public class AddWordActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.nav_add) {
                 return true;
-            } else if (id == R.id.nav_learn) {
-                startActivity(new Intent(this, LearnActivity.class));
+            } else if (id == R.id.nav_nouns) {
+                startActivity(new Intent(this, NounsActivity.class));
+                finish();
                 return true;
             } else if (id == R.id.nav_practice) {
                 startActivity(new Intent(this, MatchWordsActivity.class));
+                finish();
                 return true;
             } else if (id == R.id.nav_streak) {
                 startActivity(new Intent(this, StreakActivity.class));
+                finish();
                 return true;
             }
             return false;

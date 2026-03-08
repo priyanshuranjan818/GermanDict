@@ -69,8 +69,11 @@
     <string name="nav_add">Add</string>
     <string name="nav_home">Home</string>
     <string name="nav_learn">Learn</string>
+    <string name="nav_nouns">Nouns</string>
     <string name="nav_streak">Streak</string>
     <string name="nav_verbs">Verbs</string>
+    <string name="no_nouns_found">No nouns added yet.</string>
+    <string name="no_nouns_found_sub">Add words with the category \'Nomen\' to see them here.</string>
     <string name="no_verbs_found">No verbs added yet.</string>
     <string name="no_verbs_found_sub">Add words with the category \'Verb\' to see them here.</string>
     <string name="no_words_learn">No words to learn!</string>
@@ -78,6 +81,7 @@
     <string name="no_words_managed">No words added yet.</string>
     <string name="no_words_subtitle">Add your first German word to get started.</string>
     <string name="no_words_title">No words yet!</string>
+    <string name="nouns_title">Nouns</string>
     <string name="optional">(optional)</string>
     <string name="part_of_speech">Part of Speech</string>
     <string name="practice_your_words"> Telegram @Haxx616</string>

@@ -4,6 +4,7 @@
     <string name="nav_home">Home</string>
     <string name="nav_add">Add</string>
     <string name="nav_learn">Learn</string>
+    <string name="nav_nouns">Nouns</string>
     <string name="nav_verbs">Verbs</string>
     <string name="nav_streak">Streak</string>
 
@@ -37,6 +38,11 @@
     <string name="session_complete">Session Complete!</string>
     <string name="session_complete_msg">Great job! You\'ve reviewed all your words.</string>
     <string name="back_to_dashboard">BACK TO DASHBOARD</string>
+
+    <!-- Nouns -->
+    <string name="nouns_title">Nouns</string>
+    <string name="no_nouns_found">No nouns added yet.</string>
+    <string name="no_nouns_found_sub">Add words with the category \'Nomen\' to see them here.</string>
 
     <!-- Verbs -->
     <string name="verb_conjugations">Verb Conjugations</string>

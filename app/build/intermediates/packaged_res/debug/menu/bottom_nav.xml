@@ -9,9 +9,9 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/nav_add" />
     <item
-        android:id="@+id/nav_learn"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/nav_learn" />
+        android:id="@+id/nav_nouns"
+        android:icon="@android:drawable/ic_menu_sort_alphabetically"
+        android:title="@string/nav_nouns" />
     <item
         android:id="@+id/nav_practice"
         android:icon="@android:drawable/ic_media_play"

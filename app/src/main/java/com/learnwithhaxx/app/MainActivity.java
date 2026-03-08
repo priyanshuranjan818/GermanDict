@@ -183,8 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, AddWordActivity.class));
                 return true;
             }
-            if (id == R.id.nav_learn) {
-                startActivity(new Intent(this, LearnActivity.class));
+            if (id == R.id.nav_nouns) {
+                startActivity(new Intent(this, NounsActivity.class));
                 return true;
             }
             if (id == R.id.nav_practice) {

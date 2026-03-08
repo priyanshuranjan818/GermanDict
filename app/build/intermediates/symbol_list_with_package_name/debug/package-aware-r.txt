@@ -3006,6 +3006,9 @@ drawable bg_cal_active
 drawable bg_cal_day
 drawable bg_cal_today
 drawable bg_control_button
+drawable bg_das_badge
+drawable bg_der_badge
+drawable bg_die_badge
 drawable bg_error
 drawable bg_git_square
 drawable bg_input_field
@@ -3224,6 +3227,9 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btnDas
+id btnDer
+id btnDie
 id btnPractice
 id buttonPanel
 id cache_measures
@@ -3314,6 +3320,8 @@ id edge
 id edit_query
 id elastic
 id embed
+id emptyNounTitle
+id emptyNouns
 id emptyState
 id emptyVerbs
 id end
@@ -3330,6 +3338,7 @@ id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id filterBar
 id fitCenter
 id fitEnd
 id fitStart
@@ -3464,7 +3473,7 @@ id mtrl_view_tag_bottom_padding
 id multiply
 id nav_add
 id nav_home
-id nav_learn
+id nav_nouns
 id nav_practice
 id nav_streak
 id navigation_bar_item_active_indicator_view
@@ -3486,6 +3495,7 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id nounRecyclerView
 id off
 id on
 id onInterceptTouchReturnSwipe
@@ -3812,6 +3822,7 @@ layout activity_add_word
 layout activity_learn
 layout activity_main
 layout activity_match_words
+layout activity_nouns
 layout activity_streak
 layout activity_verbs
 layout custom_dialog
@@ -4070,8 +4081,11 @@ string mtrl_timepicker_confirm
 string nav_add
 string nav_home
 string nav_learn
+string nav_nouns
 string nav_streak
 string nav_verbs
+string no_nouns_found
+string no_nouns_found_sub
 string no_verbs_found
 string no_verbs_found_sub
 string no_words_learn
@@ -4079,6 +4093,7 @@ string no_words_learn_sub
 string no_words_managed
 string no_words_subtitle
 string no_words_title
+string nouns_title
 string optional
 string part_of_speech
 string password_toggle_content_description

@@ -245,7 +245,14 @@ public class LearnActivity extends AppCompatActivity {
     private void setupBottomNav() {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
         if (bottomNav == null) return;
-        bottomNav.setSelectedItemId(R.id.nav_learn);
+        // nav_learn is removed, so we don't highlight it. 
+        // We could highlight nav_home or nothing.
+        bottomNav.getMenu().setGroupCheckable(0, true, false); 
+        for (int i = 0; i < bottomNav.getMenu().size(); i++) {
+            bottomNav.getMenu().getItem(i).setChecked(false);
+        }
+        bottomNav.getMenu().setGroupCheckable(0, true, true);
+
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
@@ -254,14 +261,19 @@ public class LearnActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.nav_add) {
                 startActivity(new Intent(this, AddWordActivity.class));
+                finish();
                 return true;
-            } else if (id == R.id.nav_learn) {
+            } else if (id == R.id.nav_nouns) {
+                startActivity(new Intent(this, NounsActivity.class));
+                finish();
                 return true;
             } else if (id == R.id.nav_practice) {
                 startActivity(new Intent(this, MatchWordsActivity.class));
+                finish();
                 return true;
             } else if (id == R.id.nav_streak) {
                 startActivity(new Intent(this, StreakActivity.class));
+                finish();
                 return true;
             }
             return false;

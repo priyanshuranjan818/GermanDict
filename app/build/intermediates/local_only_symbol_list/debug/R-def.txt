@@ -40,6 +40,9 @@ drawable bg_cal_active
 drawable bg_cal_day
 drawable bg_cal_today
 drawable bg_control_button
+drawable bg_das_badge
+drawable bg_der_badge
+drawable bg_die_badge
 drawable bg_error
 drawable bg_git_square
 drawable bg_input_field
@@ -61,6 +64,9 @@ id backArrow
 id backBtn
 id backToDashboardBtn
 id bottomNav
+id btnDas
+id btnDer
+id btnDie
 id btnPractice
 id calNext
 id calPrev
@@ -75,10 +81,13 @@ id controlsContainer
 id dayBg
 id dayText
 id deleteBtn
+id emptyNounTitle
+id emptyNouns
 id emptyState
 id emptyVerbs
 id errorMessage
 id exportImportBtn
+id filterBar
 id formDu
 id formErSieEs
 id formIch
@@ -100,10 +109,11 @@ id matchProgressBar
 id monthTitle
 id nav_add
 id nav_home
-id nav_learn
+id nav_nouns
 id nav_practice
 id nav_streak
 id nextBtn
+id nounRecyclerView
 id pauseBtn
 id prevBtn
 id progressBar
@@ -137,6 +147,7 @@ layout activity_add_word
 layout activity_learn
 layout activity_main
 layout activity_match_words
+layout activity_nouns
 layout activity_streak
 layout activity_verbs
 layout item_calendar_day
@@ -170,8 +181,11 @@ string manage_your_words
 string nav_add
 string nav_home
 string nav_learn
+string nav_nouns
 string nav_streak
 string nav_verbs
+string no_nouns_found
+string no_nouns_found_sub
 string no_verbs_found
 string no_verbs_found_sub
 string no_words_learn
@@ -179,6 +193,7 @@ string no_words_learn_sub
 string no_words_managed
 string no_words_subtitle
 string no_words_title
+string nouns_title
 string optional
 string part_of_speech
 string practice_your_words

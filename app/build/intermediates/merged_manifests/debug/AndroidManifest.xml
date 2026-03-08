@@ -37,6 +37,7 @@
         <activity android:name="com.learnwithhaxx.app.StreakActivity" />
         <activity android:name="com.learnwithhaxx.app.VerbConjugationActivity" />
         <activity android:name="com.learnwithhaxx.app.MatchWordsActivity" />
+        <activity android:name="com.learnwithhaxx.app.NounsActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

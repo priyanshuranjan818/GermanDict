@@ -178,12 +178,15 @@ public class StreakActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.nav_add) {
                 startActivity(new Intent(this, AddWordActivity.class));
+                finish();
                 return true;
-            } else if (id == R.id.nav_learn) {
-                startActivity(new Intent(this, LearnActivity.class));
+            } else if (id == R.id.nav_nouns) {
+                startActivity(new Intent(this, NounsActivity.class));
+                finish();
                 return true;
             } else if (id == R.id.nav_practice) {
                 startActivity(new Intent(this, MatchWordsActivity.class));
+                finish();
                 return true;
             } else if (id == R.id.nav_streak) {
                 return true;
