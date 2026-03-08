@@ -19,9 +19,8 @@ import java.util.Map;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "vocab.db";
-    private static final int DATABASE_VERSION = 2; // Incremented version
+    private static final int DATABASE_VERSION = 3;
 
-    // Table names
     private static final String TABLE_USERS = "users";
     private static final String TABLE_WORDS = "words";
     private static final String TABLE_STREAK_DATES = "streak_dates";
@@ -55,29 +54,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "example TEXT, " +
                 "part_of_speech TEXT, " +
                 "date_added TEXT NOT NULL, " +
+                "level INTEGER DEFAULT 0, " +
                 "FOREIGN KEY (user_id) REFERENCES users(id))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_STREAK_DATES + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "user_id INTEGER NOT NULL, " +
                 "active_date TEXT NOT NULL, " +
-                "word_count INTEGER DEFAULT 0, " + // New column
+                "word_count INTEGER DEFAULT 0, " +
                 "FOREIGN KEY (user_id) REFERENCES users(id), " +
                 "UNIQUE(user_id, active_date))");
 
-        // Seed default user
         ContentValues cv = new ContentValues();
         cv.put("name", "Learner");
         cv.put("streak", 0);
         db.insert(TABLE_USERS, null, cv);
 
-        // Seed some default words to avoid black screen on first run
         seedDefaultWords(db);
     }
 
     private void seedDefaultWords(SQLiteDatabase db) {
         String today = getToday();
-        
         insertWord(db, "der Apfel", "Apple", "Ich esse einen Apfel.", "Nomen", today);
         insertWord(db, "die Lampe", "Lamp", "Die Lampe ist hell.", "Nomen", today);
         insertWord(db, "das Haus", "House", "Das Haus ist groß.", "Nomen", today);
@@ -93,6 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("example", example);
         cv.put("part_of_speech", pos);
         cv.put("date_added", date);
+        cv.put("level", 0);
         db.insert(TABLE_WORDS, null, cv);
     }
 
@@ -101,21 +99,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 2) {
             db.execSQL("ALTER TABLE " + TABLE_STREAK_DATES + " ADD COLUMN word_count INTEGER DEFAULT 0");
         }
+        if (oldVersion < 3) {
+            db.execSQL("ALTER TABLE " + TABLE_WORDS + " ADD COLUMN level INTEGER DEFAULT 0");
+        }
     }
-
-    // ─── Helper ─────────────────────────────────────────
-
-    private String getToday() {
-        return new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
-    }
-
-    private String getYesterday() {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_YEAR, -1);
-        return new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(cal.getTime());
-    }
-
-    // ─── User ───────────────────────────────────────────
 
     public User getUser() {
         SQLiteDatabase db = getReadableDatabase();
@@ -131,16 +118,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    // ─── Words ──────────────────────────────────────────
+    public void updateWordLevel(int wordId, int level) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("level", level);
+        db.update(TABLE_WORDS, cv, "id = ?", new String[]{String.valueOf(wordId)});
+    }
 
-    public boolean isDuplicateWord(String germanWord) {
+    public List<Word> getWordsForPractice(int limit) {
+        List<Word> practiceWords = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(
-                "SELECT id FROM " + TABLE_WORDS + " WHERE user_id = 1 AND LOWER(german_word) = LOWER(?)",
-                new String[]{germanWord});
-        boolean exists = c.getCount() > 0;
-        c.close();
-        return exists;
+        
+        // 1. First Priority: Get NEW words (level 0)
+        Cursor cNew = db.rawQuery("SELECT * FROM " + TABLE_WORDS + " WHERE level = 0 ORDER BY RANDOM() LIMIT " + limit, null);
+        if (cNew.getCount() > 0) {
+            while (cNew.moveToNext()) {
+                practiceWords.add(cursorToWord(cNew));
+            }
+            cNew.close();
+            return practiceWords; // Only show new words until they are all gone
+        }
+        cNew.close();
+
+        // 2. Second Priority (Review Phase): 80% Hard (1) and 20% Easy (2)
+        int hardLimit = (int) (limit * 0.8);
+        int easyLimit = limit - hardLimit;
+
+        Cursor cHard = db.rawQuery("SELECT * FROM " + TABLE_WORDS + " WHERE level = 1 ORDER BY RANDOM() LIMIT " + hardLimit, null);
+        while (cHard.moveToNext()) {
+            practiceWords.add(cursorToWord(cHard));
+        }
+        cHard.close();
+
+        Cursor cEasy = db.rawQuery("SELECT * FROM " + TABLE_WORDS + " WHERE level = 2 ORDER BY RANDOM() LIMIT " + easyLimit, null);
+        while (cEasy.moveToNext()) {
+            practiceWords.add(cursorToWord(cEasy));
+        }
+        cEasy.close();
+
+        // If limits didn't fill up (e.g. not enough Easy words), fill with any categorized words
+        if (practiceWords.size() < limit) {
+            Cursor cRemaining = db.rawQuery("SELECT * FROM " + TABLE_WORDS + " WHERE level > 0 ORDER BY RANDOM() LIMIT " + (limit - practiceWords.size()), null);
+            while (cRemaining.moveToNext()) {
+                Word w = cursorToWord(cRemaining);
+                boolean exists = false;
+                for (Word existing : practiceWords) {
+                    if (existing.getId() == w.getId()) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) practiceWords.add(w);
+            }
+            cRemaining.close();
+        }
+
+        return practiceWords;
     }
 
     public long addWord(String germanWord, String meaning, String example, String partOfSpeech) {
@@ -152,20 +185,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("example", example);
         cv.put("part_of_speech", partOfSpeech);
         cv.put("date_added", getToday());
+        cv.put("level", 0);
         return db.insert(TABLE_WORDS, null, cv);
-    }
-
-    public void deleteWord(int wordId) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_WORDS, "id = ? AND user_id = 1", new String[]{String.valueOf(wordId)});
     }
 
     public List<Word> getAllWords() {
         List<Word> words = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        // Changed ORDER BY from date_added DESC to id DESC to ensure newest words are always at the top
-        Cursor c = db.rawQuery(
-                "SELECT * FROM " + TABLE_WORDS + " WHERE user_id = 1 ORDER BY id DESC", null);
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_WORDS + " WHERE user_id = 1 ORDER BY id DESC", null);
         while (c.moveToNext()) {
             words.add(cursorToWord(c));
         }
@@ -175,33 +202,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Map<String, List<Word>> getWordsByCategory() {
         Map<String, List<Word>> grouped = new LinkedHashMap<>();
-        SQLiteDatabase db = getReadableDatabase();
-        // Changed ORDER BY to use id DESC within categories
-        Cursor c = db.rawQuery(
-                "SELECT * FROM " + TABLE_WORDS + " WHERE user_id = 1 ORDER BY part_of_speech, id DESC",
-                null);
-        while (c.moveToNext()) {
-            Word w = cursorToWord(c);
-            String cat = w.getPartOfSpeech();
-            if (cat == null || cat.isEmpty()) cat = "Uncategorized";
-            if (!grouped.containsKey(cat)) {
-                grouped.put(cat, new ArrayList<>());
+        List<Word> allWords = getAllWords();
+        for (Word word : allWords) {
+            String category = word.getPartOfSpeech();
+            if (category == null || category.isEmpty()) {
+                category = "Uncategorized";
             }
-            grouped.get(cat).add(w);
+            if (!grouped.containsKey(category)) {
+                grouped.put(category, new ArrayList<>());
+            }
+            grouped.get(category).add(word);
         }
-        c.close();
         return grouped;
     }
 
-    public int getTodayWordCount() {
+    public boolean isDuplicateWord(String germanWord) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_WORDS + " WHERE user_id = 1 AND date_added = ?",
-                new String[]{getToday()});
-        int count = 0;
-        if (c.moveToFirst()) count = c.getInt(0);
+        Cursor c = db.rawQuery("SELECT 1 FROM " + TABLE_WORDS + " WHERE german_word = ? COLLATE NOCASE AND user_id = 1", new String[]{germanWord});
+        boolean exists = c.getCount() > 0;
         c.close();
-        return count;
+        return exists;
     }
 
     private Word cursorToWord(Cursor c) {
@@ -213,62 +233,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         w.setExample(c.getString(c.getColumnIndexOrThrow("example")));
         w.setPartOfSpeech(c.getString(c.getColumnIndexOrThrow("part_of_speech")));
         w.setDateAdded(c.getString(c.getColumnIndexOrThrow("date_added")));
+        w.setLevel(c.getInt(c.getColumnIndexOrThrow("level")));
         return w;
     }
 
-    // ─── Streak ─────────────────────────────────────────
-
     public void updateStreak() {
         SQLiteDatabase db = getWritableDatabase();
-        User user = getUser();
         String today = getToday();
         String yesterday = getYesterday();
-        int todayCount = getTodayWordCount();
 
-        // Update word_count in streak_dates table
-        ContentValues scv = new ContentValues();
-        scv.put("user_id", 1);
-        scv.put("active_date", today);
-        scv.put("word_count", todayCount);
-        db.insertWithOnConflict(TABLE_STREAK_DATES, null, scv, SQLiteDatabase.CONFLICT_REPLACE);
+        db.execSQL("INSERT OR IGNORE INTO " + TABLE_STREAK_DATES + " (user_id, active_date, word_count) VALUES (1, ?, 0)", new Object[]{today});
+        db.execSQL("UPDATE " + TABLE_STREAK_DATES + " SET word_count = word_count + 1 WHERE user_id = 1 AND active_date = ?", new Object[]{today});
 
-        String lastActive = user.getLastActiveDate();
+        User user = getUser();
         int currentStreak = user.getStreak();
+        String lastActive = user.getLastActiveDate();
 
-        if (todayCount >= 5) {
-            if (today.equals(lastActive)) {
-                // Already updated today
-            } else if (yesterday.equals(lastActive)) {
-                currentStreak += 1;
-                ContentValues uv = new ContentValues();
-                uv.put("streak", currentStreak);
-                uv.put("last_active_date", today);
-                db.update(TABLE_USERS, uv, "id = 1", null);
-            } else if (lastActive == null) {
-                ContentValues uv = new ContentValues();
-                uv.put("streak", 1);
-                uv.put("last_active_date", today);
-                db.update(TABLE_USERS, uv, "id = 1", null);
-            } else {
-                ContentValues uv = new ContentValues();
-                uv.put("streak", 1);
-                uv.put("last_active_date", today);
-                db.update(TABLE_USERS, uv, "id = 1", null);
-            }
+        if (today.equals(lastActive)) {
+        } else if (yesterday.equals(lastActive)) {
+            currentStreak++;
+            db.execSQL("UPDATE " + TABLE_USERS + " SET streak = ?, last_active_date = ? WHERE id = 1", new Object[]{currentStreak, today});
         } else {
-            if (lastActive != null && !lastActive.equals(today) && !lastActive.equals(yesterday)) {
-                ContentValues uv = new ContentValues();
-                uv.put("streak", 0);
-                db.update(TABLE_USERS, uv, "id = 1", null);
-            }
+            currentStreak = 1;
+            db.execSQL("UPDATE " + TABLE_USERS + " SET streak = ?, last_active_date = ? WHERE id = 1", new Object[]{currentStreak, today});
         }
+    }
+
+    public List<String> getStreakDates() {
+        List<String> dates = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT active_date FROM " + TABLE_STREAK_DATES + " WHERE user_id = 1 ORDER BY active_date DESC", null);
+        while (c.moveToNext()) {
+            dates.add(c.getString(0));
+        }
+        c.close();
+        return dates;
     }
 
     public Map<String, Integer> getStreakCounts() {
         Map<String, Integer> counts = new HashMap<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(
-                "SELECT active_date, word_count FROM " + TABLE_STREAK_DATES + " WHERE user_id = 1", null);
+        Cursor c = db.rawQuery("SELECT active_date, word_count FROM " + TABLE_STREAK_DATES + " WHERE user_id = 1", null);
         while (c.moveToNext()) {
             counts.put(c.getString(0), c.getInt(1));
         }
@@ -276,15 +281,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return counts;
     }
 
-    public List<String> getStreakDates() {
-        List<String> dates = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(
-                "SELECT active_date FROM " + TABLE_STREAK_DATES + " WHERE user_id = 1", null);
-        while (c.moveToNext()) {
-            dates.add(c.getString(0));
-        }
-        c.close();
-        return dates;
-    }
+    private String getToday() { return new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date()); }
+    private String getYesterday() { Calendar cal = Calendar.getInstance(); cal.add(Calendar.DAY_OF_YEAR, -1); return new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(cal.getTime()); }
+    public void deleteWord(int wordId) { getWritableDatabase().delete(TABLE_WORDS, "id = ?", new String[]{String.valueOf(wordId)}); }
+    public int getTodayWordCount() { SQLiteDatabase db = getReadableDatabase(); Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_WORDS + " WHERE date_added = ?", new String[]{getToday()}); int count = 0; if (c.moveToFirst()) count = c.getInt(0); c.close(); return count; }
 }

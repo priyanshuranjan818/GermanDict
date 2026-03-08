@@ -36,6 +36,7 @@ color text_secondary
 color text_tertiary
 color transparent
 color white
+drawable bg_blue_light
 drawable bg_cal_active
 drawable bg_cal_day
 drawable bg_cal_today
@@ -50,6 +51,7 @@ drawable bg_learn_badge
 drawable bg_match_card_correct
 drawable bg_match_card_selected
 drawable bg_match_card_wrong
+drawable bg_orange_light
 drawable bg_pause_button
 drawable bg_progress_bar
 drawable bg_rounded_card
@@ -63,13 +65,22 @@ drawable ic_launcher_foreground
 id backArrow
 id backBtn
 id backToDashboardBtn
+id bottomArea
 id bottomNav
+id btnAgain
+id btnAnkiMode
 id btnDas
 id btnDer
 id btnDie
+id btnEasy
+id btnMatchGame
 id btnPractice
+id btnShowAnswer
 id calNext
 id calPrev
+id cardExample
+id cardGerman
+id cardMeaning
 id cardText
 id categoryArrow
 id categoryCount
@@ -81,6 +92,7 @@ id controlsContainer
 id dayBg
 id dayText
 id deleteBtn
+id divider
 id emptyNounTitle
 id emptyNouns
 id emptyState
@@ -88,6 +100,7 @@ id emptyVerbs
 id errorMessage
 id exportImportBtn
 id filterBar
+id flashcard
 id formDu
 id formErSieEs
 id formIch
@@ -119,6 +132,7 @@ id prevBtn
 id progressBar
 id progressContainer
 id progressText
+id ratingLayout
 id rightColumn
 id searchView
 id sessionComplete
@@ -144,10 +158,12 @@ id wordCategory
 id wordMeaning
 id wordRecyclerView
 layout activity_add_word
+layout activity_anki_mode
 layout activity_learn
 layout activity_main
 layout activity_match_words
 layout activity_nouns
+layout activity_practice_selection
 layout activity_streak
 layout activity_verbs
 layout item_calendar_day

@@ -8,6 +8,7 @@ public class Word {
     private String example;
     private String partOfSpeech;
     private String dateAdded;
+    private int level; // 0 = New/Again, 1 = Good, 2 = Easy
 
     public Word() {}
 
@@ -18,6 +19,7 @@ public class Word {
         this.example = example;
         this.partOfSpeech = partOfSpeech;
         this.dateAdded = dateAdded;
+        this.level = 0;
     }
 
     // Getters and Setters
@@ -41,4 +43,7 @@ public class Word {
 
     public String getDateAdded() { return dateAdded; }
     public void setDateAdded(String dateAdded) { this.dateAdded = dateAdded; }
+
+    public int getLevel() { return level; }
+    public void setLevel(int level) { this.level = level; }
 }
