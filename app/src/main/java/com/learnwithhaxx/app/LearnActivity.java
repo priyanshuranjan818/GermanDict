@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.speech.tts.TextToSpeech;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -16,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -85,8 +89,8 @@ public class LearnActivity extends AppCompatActivity {
                 ttsEnglish = new TextToSpeech(this, status2 -> {
                     if (status2 == TextToSpeech.SUCCESS) {
                         ttsEnglish.setLanguage(Locale.US);
-                        // Load words after TTS is ready
-                        initSlideshow();
+                        // Ensure UI updates happen on the Main Thread
+                        runOnUiThread(this::initSlideshow);
                     }
                 });
             }
@@ -127,7 +131,6 @@ public class LearnActivity extends AppCompatActivity {
         // Animation logic
         AnimationSet animationSet = new AnimationSet(true);
         
-        // If not shuffling (recent mode), use top-to-bottom slide
         float fromY = shouldShuffle ? 60f : -100f;
         Animation slide = new TranslateAnimation(0, 0, fromY, 0);
         slide.setDuration(400);
@@ -144,7 +147,28 @@ public class LearnActivity extends AppCompatActivity {
             slideExample.startAnimation(animationSet);
         }
 
-        slideWord.setText(word.getGermanWord());
+        String german = word.getGermanWord();
+        String lower = german.toLowerCase();
+
+        if (lower.startsWith("der ") || lower.startsWith("die ") || lower.startsWith("das ")) {
+            SpannableString ss = new SpannableString(german);
+            int color;
+            int end = 3; 
+            
+            if (lower.startsWith("der ")) {
+                color = ContextCompat.getColor(this, R.color.blue_primary);
+            } else if (lower.startsWith("die ")) {
+                color = ContextCompat.getColor(this, R.color.red_primary);
+            } else {
+                color = ContextCompat.getColor(this, R.color.green_primary);
+            }
+            
+            ss.setSpan(new ForegroundColorSpan(color), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            slideWord.setText(ss);
+        } else {
+            slideWord.setText(german);
+        }
+
         slideMeaning.setText(word.getMeaning());
         slideExample.setText(word.getExample() != null ? word.getExample() : "");
 
@@ -223,7 +247,6 @@ public class LearnActivity extends AppCompatActivity {
         controlsContainer.setVisibility(View.GONE);
         sessionComplete.setVisibility(View.VISIBLE);
 
-        // Fill progress to 100%
         if (words != null) {
             progressBar.setProgress(words.size());
             progressText.setText(words.size() + " / " + words.size());
@@ -245,8 +268,6 @@ public class LearnActivity extends AppCompatActivity {
     private void setupBottomNav() {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
         if (bottomNav == null) return;
-        // nav_learn is removed, so we don't highlight it. 
-        // We could highlight nav_home or nothing.
         bottomNav.getMenu().setGroupCheckable(0, true, false); 
         for (int i = 0; i < bottomNav.getMenu().size(); i++) {
             bottomNav.getMenu().getItem(i).setChecked(false);

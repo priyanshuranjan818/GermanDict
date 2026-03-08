@@ -3,6 +3,9 @@ package com.learnwithhaxx.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -230,7 +234,28 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
             Word word = words.get(position);
-            holder.germanWord.setText(word.getGermanWord());
+            String german = word.getGermanWord();
+            String lower = german.toLowerCase();
+
+            if (lower.startsWith("der ") || lower.startsWith("die ") || lower.startsWith("das ")) {
+                SpannableString ss = new SpannableString(german);
+                int color;
+                int end = 3; 
+                
+                if (lower.startsWith("der ")) {
+                    color = ContextCompat.getColor(MainActivity.this, R.color.blue_primary);
+                } else if (lower.startsWith("die ")) {
+                    color = ContextCompat.getColor(MainActivity.this, R.color.red_primary);
+                } else {
+                    color = ContextCompat.getColor(MainActivity.this, R.color.green_primary);
+                }
+                
+                ss.setSpan(new ForegroundColorSpan(color), 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                holder.germanWord.setText(ss);
+            } else {
+                holder.germanWord.setText(german);
+            }
+
             holder.meaning.setText(word.getMeaning());
             
             holder.speakBtn.setOnClickListener(v -> speakGerman(word.getGermanWord()));

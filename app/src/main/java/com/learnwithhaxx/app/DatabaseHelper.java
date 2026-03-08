@@ -70,6 +70,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("name", "Learner");
         cv.put("streak", 0);
         db.insert(TABLE_USERS, null, cv);
+
+        // Seed some default words to avoid black screen on first run
+        seedDefaultWords(db);
+    }
+
+    private void seedDefaultWords(SQLiteDatabase db) {
+        String today = getToday();
+        
+        insertWord(db, "der Apfel", "Apple", "Ich esse einen Apfel.", "Nomen", today);
+        insertWord(db, "die Lampe", "Lamp", "Die Lampe ist hell.", "Nomen", today);
+        insertWord(db, "das Haus", "House", "Das Haus ist groß.", "Nomen", today);
+        insertWord(db, "laufen", "to run", "Ich laufe schnell.", "Verb", today);
+        insertWord(db, "schön", "beautiful", "Das Wetter ist schön.", "Adjektiv", today);
+    }
+
+    private void insertWord(SQLiteDatabase db, String german, String meaning, String example, String pos, String date) {
+        ContentValues cv = new ContentValues();
+        cv.put("user_id", 1);
+        cv.put("german_word", german);
+        cv.put("meaning", meaning);
+        cv.put("example", example);
+        cv.put("part_of_speech", pos);
+        cv.put("date_added", date);
+        db.insert(TABLE_WORDS, null, cv);
     }
 
     @Override
