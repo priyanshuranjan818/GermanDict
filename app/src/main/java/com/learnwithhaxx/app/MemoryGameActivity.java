@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class MemoryGameActivity extends AppCompatActivity {
 
@@ -27,6 +29,7 @@ public class MemoryGameActivity extends AppCompatActivity {
     private GridLayout topGrid, bottomGrid;
     private TextView timerText, scoreText, finalStats;
     private View successOverlay;
+    private TextToSpeech tts;
 
     private List<Word> hardWords;
     private List<Word> topRowWords;
@@ -59,6 +62,12 @@ public class MemoryGameActivity extends AppCompatActivity {
 
         findViewById(R.id.closeBtn).setOnClickListener(v -> finish());
         findViewById(R.id.playAgainBtn).setOnClickListener(v -> startNewGame());
+
+        tts = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                tts.setLanguage(Locale.GERMAN);
+            }
+        });
 
         startNewGame();
     }
@@ -127,6 +136,12 @@ public class MemoryGameActivity extends AppCompatActivity {
         }
     }
 
+    private void speakGerman(String word) {
+        if (tts != null) {
+            tts.speak(word, TextToSpeech.QUEUE_FLUSH, null, "german_word");
+        }
+    }
+
     private void onTopCardClicked(View v) {
         if (v == selectedTopView || v.getAlpha() < 1f) return;
 
@@ -138,6 +153,8 @@ public class MemoryGameActivity extends AppCompatActivity {
         selectedTopWord = (Word) v.getTag();
         setCardBackground(v, R.drawable.bg_memory_card_selected);
         flipCard(v, true);
+
+        speakGerman(selectedTopWord.getGermanWord());
 
         checkMatch();
     }
@@ -264,6 +281,10 @@ public class MemoryGameActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
         timerHandler.removeCallbacks(timerRunnable);
         super.onDestroy();
     }

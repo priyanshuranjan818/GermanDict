@@ -57,6 +57,9 @@ public class AddWordActivity extends AppCompatActivity {
         Button submitBtn = findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(v -> saveWord());
 
+        // Focus on German word input
+        inputGermanWord.requestFocus();
+
         // Bottom Navigation
         setupBottomNav();
     }
