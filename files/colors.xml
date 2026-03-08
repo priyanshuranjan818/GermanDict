@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- GitHub Dark Theme Base -->
+    <color name="bg_primary">#0D1117</color>
+    <color name="bg_secondary">#161B22</color>
+    <color name="bg_card">#0D1A0F</color>
+    <color name="border_default">#30363D</color>
+    <color name="border_muted">#21262D</color>
+
+    <!-- Text -->
+    <color name="text_primary">#E6EDF3</color>
+    <color name="text_secondary">#8B949E</color>
+    <color name="text_muted">#484F58</color>
+
+    <!-- GitHub Greens (contribution levels) -->
+    <color name="green_0">#161B22</color>
+    <color name="green_1">#0E4429</color>
+    <color name="green_2">#006D32</color>
+    <color name="green_3">#26A641</color>
+    <color name="green_4">#39D353</color>
+
+    <!-- Accent -->
+    <color name="green_accent">#39D353</color>
+    <color name="green_accent_dim">#0F2318</color>
+    <color name="green_border">#26A641</color>
+    <color name="green_text_light">#B4F5C4</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+</resources>

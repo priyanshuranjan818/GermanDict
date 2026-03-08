@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Palette -->
+    <!-- GitHub Dark Mode Palette -->
+    <color name="github_dark_bg">#0d1117</color>
+    <color name="github_dark_card">#161b22</color>
+    <color name="github_dark_border">#30363d</color>
+    <color name="github_dark_text_primary">#e6edf3</color>
+    <color name="github_dark_text_secondary">#8b949e</color>
+    <color name="github_dark_accent">#58a6ff</color>
+
+    <!-- GitHub Contribution Levels -->
+    <color name="github_level_0">#161b22</color>
+    <color name="github_level_1">#0e4429</color>
+    <color name="github_level_2">#006d32</color>
+    <color name="github_level_3">#26a641</color>
+    <color name="github_level_4">#39d353</color>
+
+    <!-- Original Primary Palette (Keeping for compatibility) -->
     <color name="primary">#FF2D55FF</color>
     <color name="primary_dark">#FF1A3BB2</color>
     <color name="primary_light">#FFE8EFFF</color>
@@ -23,7 +38,7 @@
     <color name="border">#FFDEE2E6</color>
     <color name="border_light">#FFDEE2E6</color>
 
-    <!-- GitHub Streak Colors (Modernized) -->
+    <!-- GitHub Streak Colors (Modernized - keeping for potential references) -->
     <color name="git_level_0">#EBEDF0</color>
     <color name="git_level_1">#9BE9A8</color>
     <color name="git_level_2">#40C463</color>
@@ -45,4 +60,23 @@
     <color name="text_secondary">#FF495057</color>
     <color name="text_tertiary">#FFADB5BD</color>
     <color name="transparent">#00000000</color>
+
+    <!-- References from 'files' folder -->
+    <color name="bg_primary">#0D1117</color>
+    <color name="bg_secondary">#161B22</color>
+    <color name="bg_card">#0D1A0F</color>
+    <color name="border_default">#30363D</color>
+    <color name="border_muted">#21262D</color>
+
+    <color name="green_0">#161B22</color>
+    <color name="green_1">#0E4429</color>
+    <color name="green_2">#006D32</color>
+    <color name="green_3">#26A641</color>
+    <color name="green_4">#39D353</color>
+
+    <color name="green_accent">#39D353</color>
+    <color name="green_accent_dim">#0F2318</color>
+    <color name="green_border">#26A641</color>
+    <color name="green_text_light">#B4F5C4</color>
+
 </resources>

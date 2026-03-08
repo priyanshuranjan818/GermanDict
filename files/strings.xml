@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StreakApp</string>
+    <string name="streak_label">DAY STREAK</string>
+    <string name="activity_insights">Activity Insights</string>
+    <string name="this_month">This Month</string>
+    <string name="active_status">● ACTIVE</string>
+    <string name="streak_title">Streak</string>
+    <string name="less">Less</string>
+    <string name="more">More</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_add">Add</string>
+    <string name="nav_practice">Practice</string>
+    <string name="nav_learn">Learn</string>
+    <string name="nav_streak">Streak</string>
+    <string name="stat_best">Best</string>
+    <string name="stat_active">Active</string>
+    <string name="stat_total">Total</string>
+    <string name="contributions">contributions</string>
+    <string name="no_activity">No activity</string>
+</resources>

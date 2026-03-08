@@ -59,6 +59,21 @@
     <string name="daily_goal_desc">Add 5 words today to keep your streak alive!</string>
     <string name="start_lesson">START LESSON</string>
 
+    <!-- References from 'files' folder -->
+    <string name="streak_label">DAY STREAK</string>
+    <string name="activity_insights">Activity Insights</string>
+    <string name="this_month">This Month</string>
+    <string name="active_status">● ACTIVE</string>
+    <string name="less">Less</string>
+    <string name="more">More</string>
+    <string name="nav_practice">Practice</string>
+    <string name="stat_best">Best</string>
+    <string name="stat_active">Active</string>
+    <string name="stat_total">Total</string>
+    <string name="contributions">contributions</string>
+    <string name="no_activity">No activity</string>
+    <string name="close">Close</string>
+
     <!-- Part of Speech options -->
     <string-array name="parts_of_speech">
         <item>— Kategorie wählen —</item>

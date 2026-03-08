@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Note: Tiling vectors is not supported via <bitmap> in XML.
+     Using the vector directly to avoid crash. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_grid_tile" />
+</layer-list>
