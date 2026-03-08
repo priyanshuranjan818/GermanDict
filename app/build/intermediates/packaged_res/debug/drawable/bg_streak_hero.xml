@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Solid Background with Gradient -->
+    <!-- Solid Background (Light) -->
     <item>
         <shape>
-            <gradient
-                android:startColor="#0d1117"
-                android:centerColor="#0d1a0f"
-                android:endColor="#0f2318"
-                android:angle="340" />
+            <solid android:color="#F8F9FA" />
             <corners android:radius="24dp" />
-            <stroke android:width="1dp" android:color="#4026a641" />
+            <stroke android:width="1dp" android:color="#E0E0E0" />
         </shape>
     </item>
 
-    <!-- Matrix Grid Layer -->
-    <item android:drawable="@drawable/bg_matrix_grid" android:alpha="0.15" />
+    <!-- Matrix Grid Layer (Subtle) -->
+    <item android:drawable="@drawable/bg_matrix_grid" android:alpha="0.05" />
 </layer-list>

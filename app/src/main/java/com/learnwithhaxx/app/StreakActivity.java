@@ -28,11 +28,11 @@ public class StreakActivity extends AppCompatActivity {
 
     // ── GitHub green contribution levels (Reversed: Light to Dark) ─────────────
     private static final int[] GREEN_LEVELS = {
-        0xFF161B22,  // 0 – no activity (Background)
-        0xFF39D353,  // 1 – low (Lightest Green)
-        0xFF26A641,  // 2 – medium
-        0xFF006D32,  // 3 – high
-        0xFF0E4429   // 4 – max (Darkest Green)
+        0xFFEBEDF0,  // 0 – no activity (Light Gray for light theme)
+        0xFF9BE9A8,  // 1 – low
+        0xFF40C463,  // 2 – medium
+        0xFF30A14E,  // 3 – high
+        0xFF216E39   // 4 – max
     };
 
     private static final String[] DAYS_SHORT   = {"S","M","T","W","T","F","S"};
@@ -188,29 +188,23 @@ public class StreakActivity extends AppCompatActivity {
         tv.setIncludeFontPadding(false);
         tv.setPadding(0, 0, 0, 0);
 
-        if (level >= 1) {
-            // For light green to dark green, we adjust text color for readability
-            // If it's the lightest green (level 1), use dark text or stay white?
-            // Usually, white text on dark green is better.
-            tv.setTextColor(level <= 2 ? 0xFF000000 : Color.WHITE);
-            tv.setTypeface(tv.getTypeface(), android.graphics.Typeface.BOLD);
-        } else {
-            tv.setTextColor(0xFF484F58);
-        }
+        // ALWAYS BLACK TEXT for light theme date numbers
+        tv.setTextColor(0xFF000000); 
+        tv.setTypeface(tv.getTypeface(), android.graphics.Typeface.BOLD);
 
         GradientDrawable bg = new GradientDrawable();
         bg.setShape(GradientDrawable.RECTANGLE);
         bg.setCornerRadius(dpToPx(6));
 
         if (isToday) {
-            bg.setColor(0xFF161B22);
+            bg.setColor(Color.WHITE);
             bg.setStroke(dpToPx(2), 0xFF39D353);
         } else if (level > 0) {
             bg.setColor(GREEN_LEVELS[level]);
-            bg.setStroke(dpToPx(1), 0x14FFFFFF);
+            bg.setStroke(dpToPx(1), 0x14000000);
         } else {
-            bg.setColor(GREEN_LEVELS[0]);
-            bg.setStroke(dpToPx(1), 0xFF21262D);
+            bg.setColor(GREEN_LEVELS[0]); // Light gray background for empty cells
+            bg.setStroke(dpToPx(1), 0xFFE0E0E0);
         }
         tv.setBackground(bg);
 
@@ -239,7 +233,7 @@ public class StreakActivity extends AppCompatActivity {
         for (String label : DAYS_SHORT) {
             TextView tv = new TextView(this);
             tv.setText(label);
-            tv.setTextColor(0xFF484F58);
+            tv.setTextColor(0xFF000000); // Black day headers
             tv.setTextSize(11f);
             tv.setTypeface(tv.getTypeface(), android.graphics.Typeface.BOLD);
             tv.setGravity(Gravity.CENTER);
@@ -274,7 +268,7 @@ public class StreakActivity extends AppCompatActivity {
             bg.setShape(GradientDrawable.RECTANGLE);
             bg.setCornerRadius(dpToPx(2));
             bg.setColor(GREEN_LEVELS[level]);
-            bg.setStroke(dpToPx(1), 0x06FFFFFF);
+            bg.setStroke(dpToPx(1), 0x14000000);
             cell.setBackground(bg);
 
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(size, size);
@@ -296,7 +290,7 @@ public class StreakActivity extends AppCompatActivity {
             bg.setShape(GradientDrawable.RECTANGLE);
             bg.setCornerRadius(dpToPx(3));
             bg.setColor(color);
-            bg.setStroke(dpToPx(1), 0x08FFFFFF);
+            bg.setStroke(dpToPx(1), 0x14000000);
             cell.setBackground(bg);
 
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(size, size);

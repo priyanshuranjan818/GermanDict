@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary">
+    android:background="@color/white">
 
     <!-- Top Content Area (Non-scrollable) -->
     <LinearLayout
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/streak_title"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:fontFamily="monospace"
@@ -50,11 +50,10 @@
                 android:textSize="11sp"
                 android:textStyle="bold"
                 android:fontFamily="monospace"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:background="@drawable/bg_github_badge" />
+                android:paddingBottom="4dp" />
         </LinearLayout>
 
         <!-- HERO CARD (Made more compact) -->
@@ -99,7 +98,7 @@
                     android:text="1"
                     android:textSize="64sp"
                     android:textStyle="bold"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:fontFamily="monospace"
                     android:gravity="center"
                     android:includeFontPadding="false" />
@@ -126,7 +125,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#21262D"
+                    android:background="@color/border_light"
                     android:layout_marginTop="12dp" />
 
                 <LinearLayout
@@ -162,7 +161,7 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="#21262D" />
+                        android:background="@color/border_light" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -191,7 +190,7 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="#21262D" />
+                        android:background="@color/border_light" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -246,7 +245,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/activity_insights"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:fontFamily="monospace" />
@@ -257,11 +256,10 @@
                 android:textColor="@color/green_accent"
                 android:textSize="11sp"
                 android:fontFamily="monospace"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:background="@drawable/bg_github_badge" />
+                android:paddingBottom="3dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -292,7 +290,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="March 2026"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:fontFamily="monospace"
@@ -326,7 +324,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#21262D"
+                android:background="@color/border_light"
                 android:layout_marginTop="8dp" />
 
             <LinearLayout
@@ -364,9 +362,9 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_primary"
-        app:itemIconTint="@color/green_accent"
-        app:itemTextColor="@color/green_accent"
+        android:background="@color/white"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav"
         app:layout_constraintBottom_toBottomOf="parent"

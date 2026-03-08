@@ -9,7 +9,7 @@ import android.view.View;
 public class GridPatternView extends View {
 
     private Paint gridPaint;
-    private int gridSpacingDp = 28; // size of each cell
+    private int gridSpacingDp = 24; // slightly smaller grid cells
 
     public GridPatternView(Context context) {
         super(context);
@@ -23,8 +23,9 @@ public class GridPatternView extends View {
 
     private void init() {
         gridPaint = new Paint();
-        gridPaint.setColor(0x0A39D353); // #39D353 at ~4% opacity
-        gridPaint.setStrokeWidth(1f);
+        // Bright green lines with low opacity (approx 15% opacity)
+        gridPaint.setColor(0x2639D353); 
+        gridPaint.setStrokeWidth(2f); // thicker lines for "check" feel
         gridPaint.setAntiAlias(true);
     }
 
@@ -34,11 +35,11 @@ public class GridPatternView extends View {
         float spacing = gridSpacingDp * getResources().getDisplayMetrics().density;
         
         // Draw vertical lines
-        for (float x = 0; x < getWidth(); x += spacing) {
+        for (float x = 0; x <= getWidth(); x += spacing) {
             canvas.drawLine(x, 0, x, getHeight(), gridPaint);
         }
         // Draw horizontal lines
-        for (float y = 0; y < getHeight(); y += spacing) {
+        for (float y = 0; y <= getHeight(); y += spacing) {
             canvas.drawLine(0, y, getWidth(), y, gridPaint);
         }
     }
