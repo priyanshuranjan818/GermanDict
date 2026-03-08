@@ -12,6 +12,10 @@ public class PracticeSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_selection);
 
+        findViewById(R.id.btnMemoryGame).setOnClickListener(v -> {
+            startActivity(new Intent(this, MemoryGameActivity.class));
+        });
+
         findViewById(R.id.btnMatchGame).setOnClickListener(v -> {
             startActivity(new Intent(this, MatchWordsActivity.class));
         });
@@ -25,11 +29,7 @@ public class PracticeSelectionActivity extends AppCompatActivity {
 
     private void setupBottomNav() {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
-        if (bottomNav == null) {
-            // If not in layout, we need to add it or handle it. 
-            // For now, let's assume it's there or we'll add it to the layout.
-            return;
-        }
+        if (bottomNav == null) return;
         bottomNav.setSelectedItemId(R.id.nav_practice);
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();

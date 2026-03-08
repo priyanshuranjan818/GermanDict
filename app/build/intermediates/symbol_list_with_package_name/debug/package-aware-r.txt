@@ -1356,6 +1356,7 @@ color background_floating_material_light
 color background_material_dark
 color background_material_light
 color bg_blue_light
+color bg_green_light
 color bg_light
 color bg_main
 color bg_orange_light
@@ -3012,11 +3013,15 @@ drawable bg_der_badge
 drawable bg_die_badge
 drawable bg_error
 drawable bg_git_square
+drawable bg_green_light
 drawable bg_input_field
 drawable bg_learn_badge
 drawable bg_match_card_correct
 drawable bg_match_card_selected
 drawable bg_match_card_wrong
+drawable bg_memory_card_correct
+drawable bg_memory_card_selected
+drawable bg_memory_card_wrong
 drawable bg_orange_light
 drawable bg_pause_button
 drawable bg_progress_bar
@@ -3225,6 +3230,7 @@ id bestChoice
 id blocking
 id bottom
 id bottomArea
+id bottomGrid
 id bottomNav
 id bounce
 id bounceBoth
@@ -3237,6 +3243,7 @@ id btnDer
 id btnDie
 id btnEasy
 id btnMatchGame
+id btnMemoryGame
 id btnPractice
 id btnShowAnswer
 id buttonPanel
@@ -3245,7 +3252,9 @@ id calNext
 id calPrev
 id callMeasure
 id cancel_button
+id cardBack
 id cardExample
+id cardFront
 id cardGerman
 id cardMeaning
 id cardText
@@ -3351,6 +3360,7 @@ id fill_horizontal
 id fill_vertical
 id filled
 id filterBar
+id finalStats
 id fitCenter
 id fitEnd
 id fitStart
@@ -3368,6 +3378,7 @@ id formIhr
 id formSieSie
 id formWir
 id fragment_container_view_tag
+id frontText
 id frost
 id fullscreen_header
 id germanWord
@@ -3542,6 +3553,7 @@ id pauseBtn
 id peekHeight
 id percent
 id pin
+id playAgainBtn
 id pooling_container_listener_holder_tag
 id position
 id postLayout
@@ -3569,6 +3581,7 @@ id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
 id scale
+id scoreText
 id screen
 id scroll
 id scrollIndicatorDown
@@ -3670,12 +3683,14 @@ id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
 id time
+id timerText
 id title
 id titleDividerNoCustom
 id title_template
 id todayCount
 id toggle
 id top
+id topGrid
 id topPanel
 id totalWordCount
 id totalWordsSearchBtn
@@ -3837,6 +3852,7 @@ layout activity_anki_mode
 layout activity_learn
 layout activity_main
 layout activity_match_words
+layout activity_memory_game
 layout activity_nouns
 layout activity_practice_selection
 layout activity_streak
@@ -3860,6 +3876,7 @@ layout design_text_input_start_icon
 layout item_calendar_day
 layout item_category_header
 layout item_match_card
+layout item_memory_card
 layout item_verb_conjugation
 layout item_word
 layout item_word_manage

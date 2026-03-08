@@ -2,6 +2,7 @@ R_DEF: Internal format may change without notice
 local
 array parts_of_speech
 color bg_blue_light
+color bg_green_light
 color bg_light
 color bg_main
 color bg_orange_light
@@ -46,11 +47,15 @@ drawable bg_der_badge
 drawable bg_die_badge
 drawable bg_error
 drawable bg_git_square
+drawable bg_green_light
 drawable bg_input_field
 drawable bg_learn_badge
 drawable bg_match_card_correct
 drawable bg_match_card_selected
 drawable bg_match_card_wrong
+drawable bg_memory_card_correct
+drawable bg_memory_card_selected
+drawable bg_memory_card_wrong
 drawable bg_orange_light
 drawable bg_pause_button
 drawable bg_progress_bar
@@ -66,6 +71,7 @@ id backArrow
 id backBtn
 id backToDashboardBtn
 id bottomArea
+id bottomGrid
 id bottomNav
 id btnAgain
 id btnAnkiMode
@@ -74,11 +80,14 @@ id btnDer
 id btnDie
 id btnEasy
 id btnMatchGame
+id btnMemoryGame
 id btnPractice
 id btnShowAnswer
 id calNext
 id calPrev
+id cardBack
 id cardExample
+id cardFront
 id cardGerman
 id cardMeaning
 id cardText
@@ -100,6 +109,7 @@ id emptyVerbs
 id errorMessage
 id exportImportBtn
 id filterBar
+id finalStats
 id flashcard
 id formDu
 id formErSieEs
@@ -107,6 +117,7 @@ id formIch
 id formIhr
 id formSieSie
 id formWir
+id frontText
 id germanWord
 id githubStreakGrid
 id header
@@ -128,12 +139,14 @@ id nav_streak
 id nextBtn
 id nounRecyclerView
 id pauseBtn
+id playAgainBtn
 id prevBtn
 id progressBar
 id progressContainer
 id progressText
 id ratingLayout
 id rightColumn
+id scoreText
 id searchView
 id sessionComplete
 id slideExample
@@ -147,7 +160,9 @@ id streakCount
 id streakNumber
 id submitBtn
 id successOverlay
+id timerText
 id todayCount
+id topGrid
 id totalWordCount
 id totalWordsSearchBtn
 id verbExpandableList
@@ -162,6 +177,7 @@ layout activity_anki_mode
 layout activity_learn
 layout activity_main
 layout activity_match_words
+layout activity_memory_game
 layout activity_nouns
 layout activity_practice_selection
 layout activity_streak
@@ -169,6 +185,7 @@ layout activity_verbs
 layout item_calendar_day
 layout item_category_header
 layout item_match_card
+layout item_memory_card
 layout item_verb_conjugation
 layout item_word
 layout item_word_manage

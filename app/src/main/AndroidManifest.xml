@@ -27,6 +27,7 @@
         <activity android:name=".NounsActivity" />
         <activity android:name=".PracticeSelectionActivity" />
         <activity android:name=".AnkiModeActivity" />
+        <activity android:name=".MemoryGameActivity" />
 
     </application>
 
