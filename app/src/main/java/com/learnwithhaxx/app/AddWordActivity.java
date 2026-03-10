@@ -247,7 +247,7 @@ public class AddWordActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (id == R.id.nav_practice) {
-                startActivity(new Intent(this, MatchWordsActivity.class));
+                startActivity(new Intent(this, PracticeSelectionActivity.class));
                 finish();
                 return true;
             } else if (id == R.id.nav_streak) {

@@ -136,6 +136,9 @@ id closeBtn
 id continueBtn
 id contributionStrip
 id controlsContainer
+id countLevel0
+id countLevel1
+id countLevel2
 id dayBg
 id dayHeaders
 id dayText
@@ -170,6 +173,7 @@ id instructionTitle
 id learnRecentBtn
 id leftColumn
 id legendStrip
+id levelCountsContainer
 id matchProgressBar
 id nav_add
 id nav_home
@@ -194,6 +198,9 @@ id slideMeaning
 id slideWord
 id slideshowContainer
 id speakBtn
+id statLevel0
+id statLevel1
+id statLevel2
 id statsBar
 id streakBadge
 id streakCount
@@ -245,6 +252,9 @@ string activity_insights
 string add_new_word
 string add_word
 string add_words
+string anki_easy
+string anki_hard
+string anki_new
 string app_name
 string back_to_dashboard
 string choose_category

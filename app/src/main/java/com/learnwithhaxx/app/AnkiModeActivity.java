@@ -25,6 +25,7 @@ public class AnkiModeActivity extends AppCompatActivity {
     private int currentIndex = 0;
 
     private TextView cardGerman, cardMeaning, cardExample, progressText;
+    private TextView countLevel0, countLevel1, countLevel2;
     private View divider;
     private Button btnShowAnswer;
     private View ratingLayout;
@@ -40,6 +41,11 @@ public class AnkiModeActivity extends AppCompatActivity {
         cardMeaning = findViewById(R.id.cardMeaning);
         cardExample = findViewById(R.id.cardExample);
         progressText = findViewById(R.id.progressText);
+        
+        countLevel0 = findViewById(R.id.countLevel0);
+        countLevel1 = findViewById(R.id.countLevel1);
+        countLevel2 = findViewById(R.id.countLevel2);
+
         divider = findViewById(R.id.divider);
         btnShowAnswer = findViewById(R.id.btnShowAnswer);
         ratingLayout = findViewById(R.id.ratingLayout);
@@ -53,18 +59,21 @@ public class AnkiModeActivity extends AppCompatActivity {
         });
 
         loadWords();
+        updateLevelStats();
 
         btnShowAnswer.setOnClickListener(v -> revealAnswer());
         
-        // HARD button (btnAgain in XML) saves as Level 1
         findViewById(R.id.btnAgain).setOnClickListener(v -> updateAndNext(1));
-        // EASY button saves as Level 2
         findViewById(R.id.btnEasy).setOnClickListener(v -> updateAndNext(2));
     }
 
+    private void updateLevelStats() {
+        countLevel0.setText(getString(R.string.anki_new, db.getWordCountByLevel(0)));
+        countLevel1.setText(getString(R.string.anki_hard, db.getWordCountByLevel(1)));
+        countLevel2.setText(getString(R.string.anki_easy, db.getWordCountByLevel(2)));
+    }
+
     private void loadWords() {
-        // Fetch words based on the 100 limit
-        // Logic in DatabaseHelper will prioritize Level 0 (New), then 80/20 mix of Level 1 (Hard) and 2 (Easy)
         words = db.getWordsForPractice(100);
         
         if (words.isEmpty()) {
@@ -86,7 +95,6 @@ public class AnkiModeActivity extends AppCompatActivity {
 
         Word word = words.get(currentIndex);
         
-        // Coloring German Article
         String german = word.getGermanWord();
         String lower = german.toLowerCase();
         if (lower.startsWith("der ") || lower.startsWith("die ") || lower.startsWith("das ")) {
@@ -104,7 +112,6 @@ public class AnkiModeActivity extends AppCompatActivity {
         cardMeaning.setText(word.getMeaning());
         cardExample.setText(word.getExample() != null ? word.getExample() : "");
 
-        // Hide answer elements
         divider.setVisibility(View.INVISIBLE);
         cardMeaning.setVisibility(View.INVISIBLE);
         cardExample.setVisibility(View.INVISIBLE);
@@ -129,6 +136,8 @@ public class AnkiModeActivity extends AppCompatActivity {
     private void updateAndNext(int level) {
         Word currentWord = words.get(currentIndex);
         db.updateWordLevel(currentWord.getId(), level);
+        
+        updateLevelStats();
 
         currentIndex++;
         showCard();

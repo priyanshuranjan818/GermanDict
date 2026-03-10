@@ -2,15 +2,26 @@ package com.learnwithhaxx.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PracticeSelectionActivity extends AppCompatActivity {
 
+    private DatabaseHelper db;
+    private TextView statLevel0, statLevel1, statLevel2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_selection);
+
+        db = DatabaseHelper.getInstance(this);
+
+        statLevel0 = findViewById(R.id.statLevel0);
+        statLevel1 = findViewById(R.id.statLevel1);
+        statLevel2 = findViewById(R.id.statLevel2);
 
         findViewById(R.id.btnMemoryGame).setOnClickListener(v -> {
             startActivity(new Intent(this, MemoryGameActivity.class));
@@ -25,6 +36,18 @@ public class PracticeSelectionActivity extends AppCompatActivity {
         });
 
         setupBottomNav();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateStats();
+    }
+
+    private void updateStats() {
+        statLevel0.setText(getString(R.string.anki_new, db.getWordCountByLevel(0)));
+        statLevel1.setText(getString(R.string.anki_hard, db.getWordCountByLevel(1)));
+        statLevel2.setText(getString(R.string.anki_easy, db.getWordCountByLevel(2)));
     }
 
     private void setupBottomNav() {

@@ -3332,6 +3332,9 @@ id contributionStrip
 id controlsContainer
 id coordinator
 id cos
+id countLevel0
+id countLevel1
+id countLevel2
 id counterclockwise
 id cradle
 id currentState
@@ -3469,6 +3472,7 @@ id leftColumn
 id leftToRight
 id legacy
 id legendStrip
+id levelCountsContainer
 id line1
 id line3
 id linear
@@ -3679,6 +3683,9 @@ id start
 id startHorizontal
 id startToEnd
 id startVertical
+id statLevel0
+id statLevel1
+id statLevel2
 id staticLayout
 id staticPostLayout
 id statsBar
@@ -4026,6 +4033,9 @@ string add_new_word
 string add_word
 string add_words
 string androidx_startup
+string anki_easy
+string anki_hard
+string anki_new
 string app_name
 string appbar_scrolling_view_behavior
 string back_to_dashboard

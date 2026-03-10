@@ -59,6 +59,11 @@
     <string name="daily_goal_desc">Add 5 words today to keep your streak alive!</string>
     <string name="start_lesson">START LESSON</string>
 
+    <!-- Anki Mode -->
+    <string name="anki_new">New: %1$d</string>
+    <string name="anki_hard">Hard: %1$d</string>
+    <string name="anki_easy">Easy: %1$d</string>
+
     <!-- References from 'files' folder -->
     <string name="streak_label">DAY STREAK</string>
     <string name="activity_insights">Activity Insights</string>

@@ -115,6 +115,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setLastActiveDate(c.getString(c.getColumnIndexOrThrow("last_active_date")));
         }
         c.close();
+
+        // Check if streak is broken
+        String today = getToday();
+        String yesterday = getYesterday();
+        String lastActive = user.getLastActiveDate();
+
+        if (lastActive != null && !lastActive.equals(today) && !lastActive.equals(yesterday)) {
+            user.setStreak(0);
+            SQLiteDatabase wdb = getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put("streak", 0);
+            wdb.update(TABLE_USERS, cv, "id = 1", null);
+        }
+
         return user;
     }
 
@@ -123,6 +137,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put("level", level);
         db.update(TABLE_WORDS, cv, "id = ?", new String[]{String.valueOf(wordId)});
+    }
+
+    public int getWordCountByLevel(int level) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_WORDS + " WHERE level = ?", new String[]{String.valueOf(level)});
+        int count = 0;
+        if (c.moveToFirst()) {
+            count = c.getInt(0);
+        }
+        c.close();
+        return count;
     }
 
     public List<Word> getWordsForPractice(int limit) {
@@ -245,17 +270,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT OR IGNORE INTO " + TABLE_STREAK_DATES + " (user_id, active_date, word_count) VALUES (1, ?, 0)", new Object[]{today});
         db.execSQL("UPDATE " + TABLE_STREAK_DATES + " SET word_count = word_count + 1 WHERE user_id = 1 AND active_date = ?", new Object[]{today});
 
-        User user = getUser();
-        int currentStreak = user.getStreak();
-        String lastActive = user.getLastActiveDate();
+        // Check if goal reached (at least 5 words today)
+        int todayCount = getTodayWordCount();
+        if (todayCount >= 5) {
+            User user = getUser();
+            int currentStreak = user.getStreak();
+            String lastActive = user.getLastActiveDate();
 
-        if (today.equals(lastActive)) {
-        } else if (yesterday.equals(lastActive)) {
-            currentStreak++;
-            db.execSQL("UPDATE " + TABLE_USERS + " SET streak = ?, last_active_date = ? WHERE id = 1", new Object[]{currentStreak, today});
-        } else {
-            currentStreak = 1;
-            db.execSQL("UPDATE " + TABLE_USERS + " SET streak = ?, last_active_date = ? WHERE id = 1", new Object[]{currentStreak, today});
+            if (today.equals(lastActive)) {
+                // Goal already reached and streak updated today
+            } else if (yesterday.equals(lastActive)) {
+                // Streak continued
+                currentStreak++;
+                db.execSQL("UPDATE " + TABLE_USERS + " SET streak = ?, last_active_date = ? WHERE id = 1", new Object[]{currentStreak, today});
+            } else {
+                // New streak started
+                currentStreak = 1;
+                db.execSQL("UPDATE " + TABLE_USERS + " SET streak = ?, last_active_date = ? WHERE id = 1", new Object[]{currentStreak, today});
+            }
         }
     }
 

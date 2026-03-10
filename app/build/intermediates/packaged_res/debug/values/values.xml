@@ -78,6 +78,9 @@
     <string name="add_new_word">Add New Word</string>
     <string name="add_word">ADD WORD</string>
     <string name="add_words">Add Words</string>
+    <string name="anki_easy">Easy: %1$d</string>
+    <string name="anki_hard">Hard: %1$d</string>
+    <string name="anki_new">New: %1$d</string>
     <string name="app_name">LearnWithHaxx</string>
     <string name="back_to_dashboard">BACK TO DASHBOARD</string>
     <string name="choose_category">-- choose category --</string>

@@ -332,6 +332,18 @@ public class StreakActivity extends AppCompatActivity {
             if (itemId == R.id.nav_home) {
                 finish();
                 return true;
+            } else if (itemId == R.id.nav_add) {
+                startActivity(new Intent(this, AddWordActivity.class));
+                finish();
+                return true;
+            } else if (itemId == R.id.nav_nouns) {
+                startActivity(new Intent(this, NounsActivity.class));
+                finish();
+                return true;
+            } else if (itemId == R.id.nav_practice) {
+                startActivity(new Intent(this, PracticeSelectionActivity.class));
+                finish();
+                return true;
             } else if (itemId == R.id.nav_streak) {
                 return true;
             }

@@ -42,13 +42,53 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <!-- Level Counts Display -->
+    <LinearLayout
+        android:id="@+id/levelCountsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/countLevel0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="New: 0"
+            android:textColor="@color/text_tertiary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/countLevel1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Hard: 0"
+            android:textColor="@color/red_primary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/countLevel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy: 0"
+            android:textColor="@color/blue_primary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <!-- Card Area -->
     <androidx.cardview.widget.CardView
         android:id="@+id/flashcard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottomArea"
-        android:layout_below="@id/header"
+        android:layout_below="@id/levelCountsContainer"
         android:layout_margin="24dp"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp">
