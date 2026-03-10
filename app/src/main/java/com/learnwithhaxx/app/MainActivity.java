@@ -60,13 +60,16 @@ public class MainActivity extends AppCompatActivity {
         wordRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         findViewById(R.id.streakBadge).setOnClickListener(v -> {
-            startActivity(new Intent(this, StreakActivity.class));
+            Intent intent = new Intent(this, StreakActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
         findViewById(R.id.learnRecentBtn).setOnClickListener(v -> {
             Intent intent = new Intent(this, LearnActivity.class);
             intent.putExtra("shuffle", false);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
         // The Total Words badge now acts as the Search trigger
@@ -183,20 +186,16 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) return true;
-            if (id == R.id.nav_add) {
-                startActivity(new Intent(this, AddWordActivity.class));
-                return true;
-            }
-            if (id == R.id.nav_nouns) {
-                startActivity(new Intent(this, NounsActivity.class));
-                return true;
-            }
-            if (id == R.id.nav_practice) {
-                startActivity(new Intent(this, PracticeSelectionActivity.class));
-                return true;
-            }
-            if (id == R.id.nav_streak) {
-                startActivity(new Intent(this, StreakActivity.class));
+            
+            Intent intent = null;
+            if (id == R.id.nav_add) intent = new Intent(this, AddWordActivity.class);
+            else if (id == R.id.nav_nouns) intent = new Intent(this, NounsActivity.class);
+            else if (id == R.id.nav_practice) intent = new Intent(this, PracticeSelectionActivity.class);
+            else if (id == R.id.nav_streak) intent = new Intent(this, StreakActivity.class);
+
+            if (intent != null) {
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 return true;
             }
             return false;

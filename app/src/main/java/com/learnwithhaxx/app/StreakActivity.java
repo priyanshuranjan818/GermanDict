@@ -331,24 +331,34 @@ public class StreakActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_home) {
                 finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             } else if (itemId == R.id.nav_add) {
                 startActivity(new Intent(this, AddWordActivity.class));
                 finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             } else if (itemId == R.id.nav_nouns) {
                 startActivity(new Intent(this, NounsActivity.class));
                 finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             } else if (itemId == R.id.nav_practice) {
                 startActivity(new Intent(this, PracticeSelectionActivity.class));
                 finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 return true;
             } else if (itemId == R.id.nav_streak) {
                 return true;
             }
             return false;
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     private int dpToPx(int dp) {
